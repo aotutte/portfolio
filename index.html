@@ -1,0 +1,2208 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ao | illustration portfolio</title>
+<meta name="description" id="pf-meta-description" content="イラストレーター ao のポートフォリオサイトです。作品・キャラクター紹介・プロフィール・お問い合わせをご覧いただけます。">
+<meta property="og:title" id="pf-og-title" content="ao | illustration portfolio">
+<meta property="og:description" id="pf-og-description" content="イラストレーター ao のポートフォリオサイトです。作品・キャラクター紹介・プロフィール・お問い合わせをご覧いただけます。">
+<meta property="og:type" content="website">
+<meta property="og:image" id="pf-og-image" content="">
+<link rel="icon" id="pf-favicon-link" href="">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Noto+Sans+JP:wght@300;400;500;600&family=Noto+Serif+JP:wght@400;500;600&display=swap');
+
+:root{
+  --bg: #edf1f5;
+  --card: #f7f9fb;
+  --navy: #1c2b42;
+  --text: #43536a;
+  --text-soft: #6c7a8e;
+  --accent-deep: #33486a;
+  --sky-1: #cddaea;
+  --sky-2: #a9bfd8;
+  --line: #d7e0ea;
+  --white: #ffffff;
+}
+
+*{ box-sizing: border-box; }
+html{ scroll-behavior: smooth; overscroll-behavior-y: none; }
+
+body{
+  margin:0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Noto Sans JP", sans-serif;
+  font-weight: 300;
+  line-height: 1.9;
+  -webkit-font-smoothing: antialiased;
+  overscroll-behavior-y: none;
+}
+a{ color: inherit; text-decoration: none; }
+img{ max-width:100%; display:block; }
+.en{ font-family: "EB Garamond", serif; }
+
+/* ---------- layout shell ---------- */
+.page{
+  max-width: 1180px;
+  margin: 0 auto;
+  background: var(--card);
+  min-height: 100vh;
+  min-height: 100dvh;
+  box-shadow: 0 0 60px rgba(28,43,66,0.06);
+}
+
+/* ---------- header ---------- */
+.site-header{
+  display:grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items:center;
+  padding: 30px 56px;
+  border-bottom: 1px solid var(--line);
+  background: var(--white);
+  position: relative;
+  z-index: 20;
+}
+.logo{
+  grid-column: 2;
+  justify-self: center;
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-weight: 600;
+  font-size: 30px;
+  color: var(--navy);
+  letter-spacing: 0.02em;
+  background:none; border:none; cursor:pointer;
+  display:inline-block; outline:none;
+}
+.logo:focus{ outline:none; }
+.nav{
+  grid-column: 3;
+  justify-self: end;
+  display:flex;
+  gap: 34px;
+  font-family: "EB Garamond", serif;
+  font-size: 15px;
+  letter-spacing: 0.04em;
+  color: var(--text);
+}
+.nav button{
+  background:none; border:none; cursor:pointer;
+  font-family: inherit; font-size: inherit; letter-spacing: inherit; color: inherit;
+  position:relative; padding: 4px 0;
+}
+.nav button:hover, .nav button.current{ color: var(--navy); }
+.nav button.current::after{
+  content:"";
+  position:absolute; left:0; right:0; bottom:-3px;
+  height:1px; background: var(--accent-deep);
+}
+.menu-btn{ grid-column: 3; justify-self: end; display:none; }
+.menu-toggle{ display:none; }
+.mobile-nav, .menu-backdrop{ display:none; }
+
+/* ---------- footer ---------- */
+.site-footer{
+  padding: 26px 56px;
+  border-top: 1px solid var(--line);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.footer-logo{
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-size: 20px;
+  color: var(--navy);
+}
+.footer-right{
+  display:flex; align-items:center; gap: 22px;
+  font-size: 12px; color: var(--text-soft);
+}
+.footer-social{ display:flex; gap:16px; font-size:13px; }
+
+/* ---------- generic section ---------- */
+.view{ display:none; }
+.view.active{ display:block; }
+
+.section{ padding: 64px 56px 70px; }
+.section-title-en{
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 500; font-size: 40px; color: var(--navy);
+  margin: 0 0 6px;
+}
+.section-title-jp{
+  font-family: "Noto Serif JP", serif;
+  font-size: 13px; letter-spacing: 0.14em; color: var(--text-soft);
+  margin: 0 0 20px;
+}
+.section-desc{ font-size: 14px; color: var(--text-soft); max-width: 46ch; line-height: 2; }
+.link-more{
+  display:inline-flex; align-items:center; gap:8px;
+  margin-top: 22px;
+  font-family: "EB Garamond", serif; font-size: 14px; color: var(--navy);
+  border-bottom: 1px solid var(--accent-deep); padding-bottom: 2px;
+  width: fit-content; background:none; border-left:none; border-right:none; border-top:none;
+  cursor:pointer;
+}
+
+/* ---------- illustration placeholders ---------- */
+.art{
+  position:relative; overflow:hidden;
+  background: linear-gradient(160deg, var(--sky-1), var(--sky-2));
+  aspect-ratio: 1/1;
+}
+.art svg{ position:absolute; inset:0; width:100%; height:100%; }
+.art.tall{ aspect-ratio: 4/5; }
+.art.wide{ aspect-ratio: 4/3; }
+
+/* ---------- hero (top page) ---------- */
+.hero{ display:grid; grid-template-columns: 1.05fr 0.95fr; }
+.hero-art{ aspect-ratio: auto; min-height: 520px; }
+.hero-copy{ padding: 60px 56px; display:flex; flex-direction:column; justify-content:center; }
+.hero-copy .tagline{
+  font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 15px;
+  color: var(--text-soft); margin-bottom: 18px;
+}
+.hero-copy h1{
+  font-family: "Noto Serif JP", serif; font-weight: 500; font-size: 30px;
+  line-height: 1.65; color: var(--navy); margin: 0 0 28px;
+}
+.hero-copy p{ font-size: 13.5px; color: var(--text-soft); line-height: 2.1; margin: 0 0 26px; max-width: 40ch; }
+
+/* ---------- top works preview strip ---------- */
+.works-preview{ padding: 58px 56px 66px; border-top: 1px solid var(--line); }
+.works-preview .label{
+  font-family: "Cormorant Garamond", serif; font-weight: 500; font-size: 26px; color: var(--navy);
+  display:flex; align-items:baseline; gap: 12px; margin-bottom: 4px;
+}
+.works-preview .label .jp{ font-family: "Noto Serif JP", serif; font-size: 13px; letter-spacing:.1em; color: var(--text-soft); }
+.strip{
+  display:flex; gap: 12px; margin-top: 24px; align-items:center;
+  overflow-x:auto; -webkit-overflow-scrolling:touch;
+  scroll-snap-type: x proximity; padding-bottom: 6px;
+  scrollbar-width: none;
+}
+.strip::-webkit-scrollbar{ display:none; }
+.strip .art{ width: 190px; flex: none; aspect-ratio: 4/3; cursor:pointer; scroll-snap-align:start; }
+.strip-arrow{
+  width: 30px; height:30px; border-radius:50%; border:1px solid var(--line);
+  display:flex; align-items:center; justify-content:center;
+  flex: none; font-size: 13px; color: var(--text-soft); cursor:pointer;
+}
+
+/* ---------- grid (works / characters) ---------- */
+.filter-tabs{
+  display:flex; gap: 26px;
+  font-family: "EB Garamond", serif; font-size: 13px; letter-spacing: .06em; color: var(--text-soft);
+  border-bottom: 1px solid var(--line); padding-bottom: 14px; margin-bottom: 26px;
+  overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none;
+}
+.filter-tabs::-webkit-scrollbar{ display:none; }
+.filter-tabs span{ flex: none; white-space: nowrap; cursor: pointer; }
+.filter-tabs span:hover{ color: var(--navy); }
+.filter-tabs .active{ color: var(--navy); border-bottom:1px solid var(--navy); padding-bottom:14px; margin-bottom:-15px; }
+.grid{ display:grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+#view-works .grid .art{ cursor:pointer; }
+
+/* ---------- work detail page ---------- */
+.work-detail-back{ margin-bottom: 26px; }
+.work-detail-art-wrap{ max-width: 640px; margin: 0 0 34px; }
+.pagination{
+  display:flex; align-items:center; gap: 16px; margin-top: 34px;
+  font-family: "EB Garamond", serif; font-size: 14px; color: var(--text-soft);
+}
+.pagination .cur{ color: var(--navy); border-bottom: 1px solid var(--navy); }
+
+/* ---------- character card ---------- */
+.char-card .art{ margin-bottom: 14px; }
+#view-characters .grid .char-card{ cursor:pointer; }
+.char-name{ font-family: "Noto Serif JP", serif; font-size: 17px; color: var(--navy); margin: 0 0 4px; }
+.char-tag{ font-size: 12px; color: var(--text-soft); letter-spacing: .02em; }
+
+/* ---------- about page ---------- */
+.about-layout{ display:grid; grid-template-columns: 320px 1fr; gap: 52px; align-items:start; }
+.about-art{ position:relative; }
+.about-signature{
+  position:absolute; right:-18px; bottom:-8px;
+  font-family:"Cormorant Garamond", serif; font-style:italic; font-size:12px; color: var(--text-soft);
+  transform: rotate(-4deg);
+}
+.about-name{ font-family:"Cormorant Garamond", serif; font-weight:600; font-size:26px; color:var(--navy); margin: 6px 0 2px; }
+.about-role{ font-size:12px; letter-spacing:.14em; color: var(--text-soft); margin-bottom: 20px; }
+.about-text{ font-size:13.5px; color: var(--text); line-height:2.1; max-width: 52ch; margin-bottom: 26px;}
+.btn{
+  display:inline-flex; align-items:center; gap:10px;
+  background: var(--navy); color: var(--white);
+  font-family:"EB Garamond", serif; font-size: 14px;
+  padding: 13px 26px; border:none; cursor:pointer;
+}
+
+/* ---------- contact page ---------- */
+.contact-layout{ display:grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items:start; }
+.field{ margin-bottom: 22px; }
+.field label{ display:block; font-size:12px; color: var(--text-soft); letter-spacing:.05em; margin-bottom: 8px; }
+.field input, .field textarea{
+  width:100%; border: 1px solid var(--line); background: var(--white);
+  padding: 13px 14px; font-family:"Noto Sans JP", sans-serif; font-size: 13px; color: var(--text);
+  resize: vertical;
+}
+.field textarea{ min-height: 120px; }
+.field input:focus, .field textarea:focus{ outline: 2px solid var(--accent-deep); outline-offset: 1px; }
+.contact-note{ font-size: 13px; color: var(--text-soft); line-height: 2.1; max-width: 34ch; }
+.contact-flower{ margin-top: 40px; opacity:.75; background:transparent; width:140px; }
+
+/* ---------- responsive ---------- */
+@media (max-width: 860px){
+  .page{ box-shadow:none; }
+  .site-header{ padding: 18px 22px; }
+  .logo{ font-size: 24px; }
+  .nav{ display:none; }
+  .menu-btn{ display:flex; flex-direction:column; gap:5px; width: 22px; cursor:pointer; background:none; border:none; padding:0; }
+  .menu-btn span{ height:1px; background:var(--navy); width:100%; transition:.25s ease; }
+  .menu-toggle:checked ~ .site-header .menu-btn span:nth-child(1){ transform: translateY(6px) rotate(45deg); }
+  .menu-toggle:checked ~ .site-header .menu-btn span:nth-child(2){ opacity:0; }
+  .menu-toggle:checked ~ .site-header .menu-btn span:nth-child(3){ transform: translateY(-6px) rotate(-45deg); }
+
+  .menu-backdrop{
+    display:block; position:fixed; inset:0; background: rgba(28,43,66,0);
+    pointer-events:none; transition: background .35s ease; z-index:9985;
+  }
+  .menu-toggle:checked ~ .menu-backdrop{ background: rgba(28,43,66,.32); pointer-events:auto; }
+
+  .mobile-nav{
+    position:fixed; top:0; right:-86%; width:86%; max-width:300px; height:100dvh; height:100vh;
+    background: var(--white); z-index:9990;
+    box-shadow: -12px 0 40px rgba(28,43,66,.18);
+    padding: 96px 34px 40px;
+    display:flex; flex-direction:column; gap:24px;
+    font-family:"EB Garamond", serif; font-size:16.5px; letter-spacing:.04em;
+    transition: right .35s ease;
+    overflow-y:auto;
+  }
+  .menu-toggle:checked ~ .mobile-nav{ right:0; }
+  .mobile-nav button{
+    background:none; border:none; text-align:left; padding:0; font:inherit; color: var(--navy);
+    cursor:pointer; width:fit-content; position:relative; padding-bottom:2px;
+  }
+  .mobile-nav button.current{ color: var(--accent-deep); }
+  .mobile-nav button.current::after{
+    content:""; position:absolute; left:0; right:0; bottom:-3px; height:1px; background: var(--accent-deep);
+  }
+  .mobile-nav-close{
+    position:absolute; top:26px; right:30px; width:32px; height:32px;
+    border:1px solid var(--line); display:flex; align-items:center; justify-content:center;
+    font-family:"EB Garamond", serif; font-size:15px; color: var(--navy); cursor:pointer;
+  }
+  .section{ padding: 40px 22px 46px; }
+  .works-preview{ padding: 40px 22px 46px; }
+  .site-footer{ padding: 22px; flex-direction:column; gap:14px; align-items:flex-start; }
+
+  .hero{ grid-template-columns: 1fr; }
+  .hero-art{ min-height: 320px; }
+  .hero-copy{ padding: 38px 22px; }
+  .hero-copy h1{ font-size: 24px; }
+  .about-layout{ grid-template-columns: 1fr; }
+  .about-art{ max-width: 260px; }
+  .contact-layout{ grid-template-columns: 1fr; }
+  .grid{ grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .section-title-en{ font-size: 32px; }
+}
+@media (max-width: 480px){
+  .strip .art{ width: 130px; }
+}
+
+/* ================================================================
+   EDITOR UI — self-contained "atelier" side drawer
+   ================================================================ */
+.pf-editor-tab{
+  position:fixed; top:50%; right:0; transform: translateY(-50%) translateZ(0);
+  -webkit-transform: translateY(-50%) translateZ(0);
+  will-change: transform;
+  writing-mode: vertical-rl; text-orientation: mixed;
+  background: var(--navy); color: var(--white);
+  font-family:"EB Garamond", serif; font-size:13px; letter-spacing:.16em;
+  padding: 20px 10px; cursor:pointer; z-index:9999;
+  border:none;
+  box-shadow: -3px 0 18px rgba(28,43,66,.18);
+  transition: right .35s ease, background .2s ease;
+}
+.pf-editor-tab:hover{ background: var(--accent-deep); }
+body.pf-editor-open .pf-editor-tab{ right: 368px; }
+body.pf-position-mode:not(.pf-editor-open) .pf-editor-tab{ background:#b8863f; }
+
+.pf-editor-panel{
+  position:fixed; top:0; right:-380px; width:368px; height:100vh;
+  background: var(--card); border-left:1px solid var(--line);
+  box-shadow: -10px 0 44px rgba(28,43,66,.14);
+  z-index:9998; overflow-y:auto; -webkit-overflow-scrolling:touch;
+  transition: right .35s ease;
+  font-family:"Noto Sans JP", sans-serif;
+  padding: 36px 30px 60px;
+}
+body.pf-editor-open .pf-editor-panel{ right:0; }
+
+.pf-editor-panel .pf-head{ margin-bottom:30px; display:flex; align-items:flex-start; justify-content:space-between; gap:16px; }
+.pf-editor-panel .pf-head h2{
+  font-family:"Cormorant Garamond", serif; font-style:italic; font-weight:600;
+  font-size:27px; color:var(--navy); margin:0 0 4px;
+}
+.pf-editor-panel .pf-head .pf-sub{
+  font-family:"Noto Serif JP", serif; font-size:11px; letter-spacing:.16em; color:var(--text-soft);
+}
+.pf-close-btn{
+  flex:none; width:34px; height:34px; border:1px solid var(--line); background:var(--white);
+  color:var(--navy); font-size:16px; line-height:1; cursor:pointer; margin-top:2px;
+}
+.pf-close-btn:hover{ border-color:var(--accent-deep); color:var(--accent-deep); }
+
+.pf-section{ border-top:1px solid var(--line); }
+.pf-section:first-of-type{ border-top:none; }
+.pf-section-head{
+  display:flex; align-items:baseline; gap:10px; cursor:pointer; user-select:none;
+  padding: 20px 0; background:none; border:none; width:100%; text-align:left;
+}
+.pf-section-head .en{ font-family:"Cormorant Garamond", serif; font-weight:500; font-size:19px; color:var(--navy); }
+.pf-section-head .jp{ font-family:"Noto Serif JP", serif; font-size:11px; letter-spacing:.1em; color:var(--text-soft); }
+.pf-section-head .arrow{ margin-left:auto; font-size:13px; color:var(--text-soft); transition:transform .25s ease; }
+.pf-section.open .pf-section-head .arrow{ transform:rotate(90deg); }
+.pf-section-body{ display:none; padding: 0 0 26px; }
+.pf-section.open .pf-section-body{ display:block; }
+
+.pf-row{ margin-bottom:18px; }
+.pf-row:last-child{ margin-bottom:0; }
+.pf-row label{ display:block; font-size:11.5px; color:var(--text-soft); letter-spacing:.03em; margin-bottom:8px; }
+.pf-color-row{ display:flex; align-items:center; gap:12px; }
+.pf-color-row input[type=color]{ width:38px; height:28px; border:1px solid var(--line); padding:0; background:none; cursor:pointer; }
+.pf-color-row .val{ font-family:"EB Garamond", serif; font-size:12.5px; color:var(--text-soft); }
+.pf-row input[type=range]{ width:100%; accent-color: var(--accent-deep); }
+.pf-range-row{ display:flex; align-items:center; gap:12px; }
+.pf-range-row input[type=range]{ flex:1; }
+.pf-range-row .val{ font-family:"EB Garamond", serif; font-size:12px; color:var(--text-soft); width:44px; text-align:right; flex:none; }
+.pf-row select{
+  width:100%; border:1px solid var(--line); background:var(--white);
+  padding:9px 10px; font-family:"Noto Sans JP", sans-serif; font-size:12.5px; color:var(--text);
+}
+.pf-row input[type=text]{
+  width:100%; border:1px solid var(--line); background:var(--white); box-sizing:border-box;
+  padding:9px 10px; font-family:"Noto Sans JP", sans-serif; font-size:12.5px; color:var(--text);
+}
+.pf-row input[type=text]:focus{ outline:2px solid var(--accent-deep); outline-offset:1px; }
+
+.pf-toggle-row{ display:flex; align-items:center; justify-content:space-between; margin-bottom:18px; }
+.pf-toggle-row label{ margin:0; font-size:12.5px; color:var(--text); }
+.pf-switch{ position:relative; width:38px; height:20px; flex:none; }
+.pf-switch input{ opacity:0; width:100%; height:100%; margin:0; position:absolute; inset:0; cursor:pointer; }
+.pf-switch .track{ position:absolute; inset:0; background:var(--line); transition:.2s ease; pointer-events:none; }
+.pf-switch .thumb{ position:absolute; top:2px; left:2px; width:16px; height:16px; background:var(--white); transition:.2s ease; box-shadow:0 1px 3px rgba(28,43,66,.3); pointer-events:none; }
+.pf-switch input:checked ~ .track{ background:var(--accent-deep); }
+.pf-switch input:checked ~ .thumb{ transform:translateX(18px); }
+.pf-subrow{ padding-left:2px; border-left:1px solid var(--line); margin-left:2px; padding-top:2px; }
+.pf-subrow.pf-disabled{ opacity:.35; pointer-events:none; }
+
+.pf-btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:8px; width:100%;
+  background:var(--navy); color:var(--white); font-family:"EB Garamond", serif; font-size:13.5px;
+  padding:12px 16px; border:none; cursor:pointer; letter-spacing:.03em;
+}
+.pf-btn:hover{ background:var(--accent-deep); }
+.pf-btn.ghost{ background:none; color:var(--navy); border:1px solid var(--line); }
+.pf-btn.ghost:hover{ border-color:var(--accent-deep); color:var(--accent-deep); }
+.pf-btn.ghost.pf-align-btn.active{ background:var(--navy); color:var(--white); border-color:var(--navy); }
+.pf-btn.danger{ background:none; color:#a24444; border:1px solid #e3c9c9; }
+.pf-btn.danger:hover{ background:#a24444; color:var(--white); border-color:#a24444; }
+.pf-btn-row{ display:flex; gap:8px; }
+.pf-btn-row .pf-btn{ width:auto; flex:1; }
+
+.pf-hint{ font-size:11.5px; color:var(--text-soft); line-height:1.9; margin:0 0 16px; }
+
+.pf-selected-box{ border:1px solid var(--line); padding:16px; margin-bottom:18px; background:var(--white); }
+.pf-selected-box .snippet{ font-size:12.5px; color:var(--navy); line-height:1.7; max-height:64px; overflow:hidden; margin-bottom:12px; }
+.pf-selected-box .empty{ font-size:12px; color:var(--text-soft); font-style:italic; }
+.pf-selected-box.pf-empty .pf-fields{ display:none; }
+.pf-selected-box:not(.pf-empty) .empty{ display:none; }
+
+.pf-add-page{ display:flex; gap:8px; margin-top:6px; }
+.pf-add-page input[type=text]{
+  flex:1; border:1px solid var(--line); background:var(--white); padding:10px 12px;
+  font-family:"Noto Sans JP", sans-serif; font-size:12.5px; color:var(--text);
+}
+.pf-add-page input[type=text]:focus{ outline:2px solid var(--accent-deep); outline-offset:1px; }
+.pf-add-page button{
+  flex:none; background:var(--navy); color:var(--white); border:none; padding:0 16px;
+  font-family:"EB Garamond", serif; font-size:13px; cursor:pointer;
+}
+.pf-add-page button:hover{ background:var(--accent-deep); }
+
+.pf-page-list{ margin-bottom:20px; }
+.pf-page-item{ display:flex; align-items:center; gap:8px; padding:9px 0; border-bottom:1px solid var(--line); }
+.pf-page-item input[type=text]{
+  flex:1; border:none; border-bottom:1px solid transparent; background:none;
+  font-family:"Noto Sans JP", sans-serif; font-size:12.5px; color:var(--text); padding:3px 0; min-width:0;
+}
+.pf-page-item input[type=text]:focus{ outline:none; border-bottom-color:var(--accent-deep); }
+.pf-page-item .del{ cursor:pointer; color:var(--text-soft); font-size:15px; background:none; border:none; flex:none; line-height:1; padding:4px; }
+.pf-page-item .del:hover{ color:#a24444; }
+
+/* interaction states injected onto the live page while editing */
+body.pf-text-mode .pf-editable-text{ outline:1px dashed rgba(51,72,106,.4); outline-offset:3px; cursor:text; }
+body.pf-text-mode .pf-editable-text:hover{ outline-color: var(--accent-deep); }
+.pf-selected{ outline:2px solid var(--accent-deep) !important; outline-offset:3px; }
+[contenteditable="true"].pf-editing{ outline:2px solid #b8863f !important; outline-offset:3px; background: rgba(184,134,63,.07); }
+/* ロゴなどのインライン要素は中身を全部消すと幅0になってタップできなくなるため、
+   編集中だけ最小サイズを確保しておく（段落・見出し系の要素には影響させない） */
+.logo.pf-editing, .footer-logo.pf-editing, .footer-right span.pf-editing{
+  display:inline-block; min-width:1.4em; min-height:1.3em;
+}
+
+body.pf-image-mode .art{ outline:1px dashed rgba(51,72,106,.4); outline-offset:2px; }
+body.pf-image-mode .art:hover{ outline-color: var(--accent-deep); }
+.pf-image-toolbar{ position:absolute; top:8px; right:8px; display:none; gap:6px; z-index:50; }
+body.pf-image-mode .pf-image-toolbar{ display:flex; }
+.pf-image-toolbar button{
+  width:28px; height:28px; border:none; background: rgba(28,43,66,.82); color:var(--white);
+  cursor:pointer; font-size:13px; display:flex; align-items:center; justify-content:center;
+}
+.pf-image-toolbar button:hover{ background: var(--accent-deep); }
+.pf-image-toolbar button.del:hover{ background:#a24444; }
+.pf-image-toolbar select.pf-cat-select{
+  height:28px; border:none; background: rgba(28,43,66,.82); color:var(--white);
+  font-family:"EB Garamond", serif; font-size:11px; cursor:pointer; padding:0 4px;
+}
+.pf-image-toolbar select.pf-cat-select:hover{ background: var(--accent-deep); }
+
+/* ---------- free layout / drag positioning ---------- */
+.pf-draggable{ position:relative; }
+body.pf-position-mode{ overscroll-behavior:contain; }
+body.pf-position-mode .pf-draggable{
+  cursor:grab; outline:1px dashed rgba(184,134,63,.55); outline-offset:3px;
+  touch-action:none; -webkit-user-select:none; user-select:none; -webkit-touch-callout:none;
+}
+body.pf-position-mode .pf-draggable:hover{ outline-color:#b8863f; }
+body.pf-position-mode .pf-draggable.pf-dragging{ cursor:grabbing; outline:2px solid #b8863f; z-index:200; opacity:.92; }
+
+/* ---------- image protection: watermark + save deterrents ---------- */
+.pf-wm-layer{
+  position:absolute; inset:0; z-index:6; pointer-events:none;
+  background-repeat:repeat; opacity:.4; display:none;
+}
+body.pf-watermark-on .pf-wm-layer{ display:block; }
+body.pf-no-save-mode .art,
+body.pf-no-save-mode .art img,
+body.pf-no-save-mode .art svg{
+  -webkit-user-select:none; user-select:none;
+  -webkit-user-drag:none; user-drag:none;
+  -webkit-touch-callout:none;
+}
+
+/* ---------- widget buttons (SNS / link) ---------- */
+.pf-widget-wrap{ padding:18px 0; display:flex; flex-wrap:wrap; }
+.pf-widget-btn{
+  display:inline-flex; align-items:center; gap:8px;
+  background:var(--navy); color:var(--white); border:none;
+  padding:10px 18px; font-family:"EB Garamond", serif; font-size:13px; letter-spacing:.04em;
+  cursor:pointer; text-decoration:none; margin:6px 8px 6px 0; vertical-align:middle;
+}
+.pf-widget-btn:hover{ background:var(--accent-deep); }
+.pf-widget-icon svg{ width:15px; height:15px; display:block; fill:currentColor; }
+
+/* ---------- entrance / attention animations ---------- */
+@keyframes pfFadeIn{ from{ opacity:0; } to{ opacity:1; } }
+@keyframes pfFadeUp{ from{ opacity:0; transform:translateY(24px); } to{ opacity:1; transform:translateY(0); } }
+@keyframes pfZoomIn{ from{ opacity:0; transform:scale(.86); } to{ opacity:1; transform:scale(1); } }
+@keyframes pfPulse{ 0%,100%{ transform:scale(1); } 50%{ transform:scale(1.06); } }
+@keyframes pfBounceY{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-6px); } }
+
+.pf-anim-fade{ opacity:0; }
+.pf-anim-fade.pf-anim-play{ animation:pfFadeIn .9s ease both; }
+.pf-anim-fadeup{ opacity:0; }
+.pf-anim-fadeup.pf-anim-play{ animation:pfFadeUp .9s ease both; }
+.pf-anim-zoom{ opacity:0; }
+.pf-anim-zoom.pf-anim-play{ animation:pfZoomIn .8s ease both; }
+.pf-anim-pulse{ animation:pfPulse 1.8s ease-in-out infinite; }
+.pf-anim-bounce{ animation:pfBounceY 1.6s ease-in-out infinite; }
+body.pf-editor-open .pf-anim-fade,
+body.pf-editor-open .pf-anim-fadeup,
+body.pf-editor-open .pf-anim-zoom{ opacity:1 !important; }
+
+/* graph-paper overlay, layered on top of whatever background color is chosen */
+.page.pf-grid-on{
+  background-image:
+    linear-gradient(var(--edit-grid-color, rgba(51,72,106,.15)) 1px, transparent 1px),
+    linear-gradient(90deg, var(--edit-grid-color, rgba(51,72,106,.15)) 1px, transparent 1px);
+  background-size: var(--edit-grid-size, 32px) var(--edit-grid-size, 32px);
+}
+
+@media (max-width: 560px){
+  .pf-editor-panel{
+    left:0; right:auto; top:auto; bottom:-78vh;
+    width:100%; height:78vh; max-height:78vh;
+    border-left:none; border-top:1px solid var(--line);
+    border-radius: 16px 16px 0 0;
+    box-shadow: 0 -10px 34px rgba(28,43,66,.18);
+    transition: bottom .35s ease;
+    padding: 26px 22px 44px;
+  }
+  body.pf-editor-open .pf-editor-panel{ bottom:0; }
+  body.pf-editor-open .pf-editor-tab{ opacity:0; pointer-events:none; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <input type="checkbox" id="menu-toggle" class="menu-toggle">
+  <header class="site-header">
+    <span class="logo" role="button" tabindex="0"
+      onclick="if(this.getAttribute('contenteditable')!=='true'){showPage('top');}"
+      onkeydown="if((event.key==='Enter'||event.key===' ') && this.getAttribute('contenteditable')!=='true'){event.preventDefault();showPage('top');}">ao</span>
+    <nav class="nav">
+      <button data-page="top" class="current" onclick="showPage('top')">TOP</button>
+      <button data-page="works" onclick="showPage('works')">WORKS</button>
+      <button data-page="characters" onclick="showPage('characters')">CHARACTERS</button>
+      <button data-page="about" onclick="showPage('about')">ABOUT</button>
+      <button data-page="contact" onclick="showPage('contact')">CONTACT</button>
+    </nav>
+    <label for="menu-toggle" class="menu-btn"><span></span><span></span><span></span></label>
+  </header>
+  <label for="menu-toggle" class="menu-backdrop"></label>
+  <label for="menu-toggle" class="mobile-nav">
+    <span class="mobile-nav-close">✕</span>
+    <button data-page="top" onclick="showPage('top')">TOP</button>
+    <button data-page="works" onclick="showPage('works')">WORKS</button>
+    <button data-page="characters" onclick="showPage('characters')">CHARACTERS</button>
+    <button data-page="about" onclick="showPage('about')">ABOUT</button>
+    <button data-page="contact" onclick="showPage('contact')">CONTACT</button>
+  </label>
+
+  <!-- ============ TOP ============ -->
+  <div class="view active" id="view-top">
+    <section class="hero">
+      <div class="art hero-art">
+        <svg viewBox="0 0 600 700" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#bfd1e6"/>
+              <stop offset="1" stop-color="#e7edf4"/>
+            </linearGradient>
+          </defs>
+          <rect width="600" height="700" fill="url(#sky)"/>
+          <ellipse cx="120" cy="140" rx="70" ry="22" fill="#ffffff" opacity="0.55"/>
+          <ellipse cx="470" cy="90" rx="55" ry="16" fill="#ffffff" opacity="0.45"/>
+          <g opacity="0.5" fill="#7590ae">
+            <rect x="0" y="500" width="40" height="200"/>
+            <rect x="60" y="460" width="55" height="240"/>
+            <rect x="480" y="470" width="60" height="230"/>
+            <rect x="545" y="510" width="55" height="190"/>
+          </g>
+          <g stroke="#4c5f79" stroke-width="1.4" opacity="0.6">
+            <line x1="0" y1="430" x2="600" y2="480"/>
+            <line x1="80" y1="380" x2="80" y2="700"/>
+          </g>
+          <g fill="#33415a">
+            <ellipse cx="300" cy="330" rx="44" ry="52"/>
+            <path d="M256 340 q44 -70 88 0 l6 190 q-50 24 -100 0 z"/>
+          </g>
+        </svg>
+      </div>
+      <div class="hero-copy">
+        <p class="tagline en">Illustration makes everyday more special.</p>
+        <h1>日常の中にある<br>美しい瞬間を、<br>絵にする。</h1>
+        <p>何気ない風景や、ふとした感情。<br>
+        心に残る記憶を、イラストで表現しています。<br>
+        見た人の記憶にそっと寄り添うような、<br>
+        そんな作品を目指しています。</p>
+        <button class="link-more" onclick="showPage('about')">ABOUT →</button>
+      </div>
+    </section>
+
+    <section class="works-preview">
+      <div class="label"><span>01</span><span class="jp">Works　作品一覧</span></div>
+      <div class="strip">
+        <div class="art">
+          <svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg">
+            <rect width="200" height="150" fill="#c7d7e8"/>
+            <rect y="90" width="200" height="60" fill="#8fa6c3"/>
+            <circle cx="150" cy="40" r="20" fill="#eef3f8" opacity="0.7"/>
+          </svg>
+        </div>
+        <div class="art">
+          <svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg">
+            <rect width="200" height="150" fill="#d7e2ee"/>
+            <line x1="0" y1="60" x2="200" y2="90" stroke="#4c5f79" stroke-width="1.5"/>
+            <line x1="40" y1="0" x2="40" y2="150" stroke="#4c5f79" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <div class="art">
+          <svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg">
+            <rect width="200" height="150" fill="#bcccdf"/>
+            <rect y="100" width="200" height="50" fill="#5a6f8c"/>
+          </svg>
+        </div>
+        <div class="strip-arrow">›</div>
+      </div>
+      <button class="link-more" onclick="showPage('works')">VIEW ALL →</button>
+    </section>
+  </div>
+
+  <!-- ============ WORKS ============ -->
+  <div class="view" id="view-works">
+    <section class="section">
+      <div class="section-head">
+        <h1 class="section-title-en">Works</h1>
+        <p class="section-title-jp">作品一覧</p>
+        <p class="section-desc">これまでに制作したイラストを掲載しています。テーマごとにまとめてご覧いただけます。</p>
+      </div>
+      <div class="filter-tabs">
+        <span class="active" data-filter="all">ALL</span><span data-filter="illustration">ILLUSTRATION</span><span data-filter="character">CHARACTER</span><span data-filter="client">CLIENT</span>
+      </div>
+      <div class="grid">
+        <div class="art wide" data-category="illustration"><svg viewBox="0 0 300 220" xmlns="http://www.w3.org/2000/svg">
+          <rect width="300" height="220" fill="#c7d7e8"/><circle cx="230" cy="60" r="26" fill="#eef3f8" opacity=".7"/><rect y="150" width="300" height="70" fill="#8fa6c3"/></svg></div>
+        <div class="art wide" data-category="illustration"><svg viewBox="0 0 300 220" xmlns="http://www.w3.org/2000/svg">
+          <rect width="300" height="220" fill="#dbe4ef"/><line x1="0" y1="120" x2="300" y2="90" stroke="#4c5f79" stroke-width="1.5"/><line x1="90" y1="0" x2="90" y2="220" stroke="#4c5f79" stroke-width="1.5"/></svg></div>
+        <div class="art wide" data-category="character"><svg viewBox="0 0 300 220" xmlns="http://www.w3.org/2000/svg">
+          <rect width="300" height="220" fill="#eef3f8"/><ellipse cx="90" cy="60" rx="60" ry="18" fill="#fff" opacity=".7"/><rect y="170" width="300" height="50" fill="#a9bfd8"/></svg></div>
+        <div class="art wide" data-category="character"><svg viewBox="0 0 300 220" xmlns="http://www.w3.org/2000/svg">
+          <rect width="300" height="220" fill="#c3d3e6"/><ellipse cx="90" cy="60" rx="60" ry="18" fill="#fff" opacity=".6"/><rect y="170" width="300" height="50" fill="#8fa6c3"/></svg></div>
+        <div class="art wide" data-category="client"><svg viewBox="0 0 300 220" xmlns="http://www.w3.org/2000/svg">
+          <rect width="300" height="220" fill="#b9c9de"/><rect y="120" width="300" height="100" fill="#3d4f6b"/><circle cx="230" cy="60" r="18" fill="#eef3f8" opacity=".6"/></svg></div>
+        <div class="art wide" data-category="client"><svg viewBox="0 0 300 220" xmlns="http://www.w3.org/2000/svg">
+          <rect width="300" height="220" fill="#33415a"/><circle cx="80" cy="60" r="4" fill="#fff" opacity=".8"/><circle cx="220" cy="70" r="4" fill="#fff" opacity=".7"/><path d="M0 220 L120 130 L180 190 L300 100 L300 220 Z" fill="#1c2b42"/></svg></div>
+      </div>
+      <div class="pagination"><span class="cur">1</span><span>2</span><span>3</span><span>→</span></div>
+    </section>
+  </div>
+
+  <!-- ============ WORK DETAIL ============ -->
+  <div class="view" id="view-work-detail">
+    <section class="section">
+      <button type="button" class="link-more work-detail-back" onclick="closeWorkDetail()">← WORKS一覧に戻る</button>
+      <div class="work-detail-art-wrap" id="work-detail-art-slot"></div>
+      <div class="section-head">
+        <h1 class="section-title-en" id="work-detail-title">Work 01</h1>
+        <p class="section-desc" id="work-detail-desc">ここに作品の説明文を入力してください。</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- ============ CHARACTERS ============ -->
+  <div class="view" id="view-characters">
+    <section class="section">
+      <div class="section-head">
+        <h1 class="section-title-en">Characters</h1>
+        <p class="section-title-jp">キャラクター</p>
+        <p class="section-desc">オリジナルキャラクターたちのプロフィールや設定を掲載しています。それぞれの個性や、表情のバリエーションもぜひご覧ください。</p>
+      </div>
+      <div class="grid">
+        <div class="char-card">
+          <div class="art"><svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+            <rect width="300" height="300" fill="#d3e0ee"/><ellipse cx="150" cy="150" rx="48" ry="58" fill="#33415a"/><path d="M100 165 q50 -80 100 0 l8 180 q-58 26 -116 0 z" fill="#3d4f6b"/></svg></div>
+          <p class="char-name">はるか</p><p class="char-tag">高校生 / 好き：音楽・空</p>
+        </div>
+        <div class="char-card">
+          <div class="art"><svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+            <rect width="300" height="300" fill="#c5d5e6"/><ellipse cx="150" cy="150" rx="46" ry="55" fill="#1c2b42"/><path d="M104 160 q46 -60 92 0 l10 180 q-56 24 -112 0 z" fill="#26374f"/></svg></div>
+          <p class="char-name">レン</p><p class="char-tag">大学生 / 好き：カフェ・本</p>
+        </div>
+        <div class="char-card">
+          <div class="art"><svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+            <rect width="300" height="300" fill="#dce6f0"/><ellipse cx="150" cy="150" rx="48" ry="58" fill="#3d4f6b"/><path d="M100 165 q50 -70 100 0 l8 180 q-58 26 -116 0 z" fill="#48597a"/></svg></div>
+          <p class="char-name">そら</p><p class="char-tag">社会人 / 好き：写真</p>
+        </div>
+        <div class="char-card">
+          <div class="art"><svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+            <rect width="300" height="300" fill="#c9d8e8"/><ellipse cx="150" cy="180" rx="70" ry="34" fill="#1c2b42"/><circle cx="120" cy="150" r="26" fill="#1c2b42"/><path d="M100 132 l8 -18 12 14 z" fill="#1c2b42"/><path d="M140 132 l-8 -18 -12 14 z" fill="#1c2b42"/></svg></div>
+          <p class="char-name">くろ</p><p class="char-tag">猫 / 好き：のんびり</p>
+        </div>
+      </div>
+      <button class="link-more" onclick="showPage('works')">VIEW ALL →</button>
+    </section>
+  </div>
+
+  <!-- ============ CHARACTER DETAIL ============ -->
+  <div class="view" id="view-character-detail">
+    <section class="section">
+      <button type="button" class="link-more work-detail-back" onclick="closeCharacterDetail()">← CHARACTERS一覧に戻る</button>
+      <div class="work-detail-art-wrap" id="character-detail-art-slot"></div>
+      <p class="about-name" id="character-detail-name">はるか</p>
+      <p class="char-tag" id="character-detail-tag">高校生 / 好き：音楽・空</p>
+      <p class="about-text" id="character-detail-bio">ここにキャラクターの詳しい紹介文を入力してください。</p>
+    </section>
+  </div>
+
+  <!-- ============ ABOUT ============ -->
+  <div class="view" id="view-about">
+    <section class="section">
+      <div class="section-head">
+        <h1 class="section-title-en">About</h1>
+        <p class="section-title-jp">プロフィール</p>
+      </div>
+      <div class="about-layout">
+        <div class="about-art">
+          <div class="art tall"><svg viewBox="0 0 320 400" xmlns="http://www.w3.org/2000/svg">
+            <rect width="320" height="400" fill="#d3e0ee"/><ellipse cx="160" cy="180" rx="58" ry="70" fill="#33415a"/><path d="M100 195 q60 -95 120 0 l10 220 q-70 30 -140 0 z" fill="#3d4f6b"/></svg></div>
+          <span class="about-signature">Thank you for visiting</span>
+        </div>
+        <div>
+          <p class="about-name">ao</p>
+          <p class="about-role en">ILLUSTRATOR</p>
+          <p class="about-text">
+            1998年生まれ、東京都在住。<br>
+            イラストレーターとして、書籍・雑誌・広告など幅広い媒体で活動しています。<br>
+            好きなものは、コーヒーと音楽と、きれいな空。
+          </p>
+          <button class="btn" onclick="showPage('works')">もっと見る →</button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ============ CONTACT ============ -->
+  <div class="view" id="view-contact">
+    <section class="section">
+      <div class="section-head">
+        <h1 class="section-title-en">Contact</h1>
+        <p class="section-title-jp">お問い合わせ</p>
+      </div>
+      <div class="contact-layout">
+        <form id="pf-contact-form" data-mailto="" data-endpoint="">
+          <div class="field"><label for="name">お名前</label><input type="text" id="name" placeholder="例）山田 太郎"></div>
+          <div class="field"><label for="email">メールアドレス</label><input type="email" id="email" placeholder="例）example@domain.com"></div>
+          <div class="field"><label for="message">お問い合わせ内容</label><textarea id="message" placeholder="ご要望・ご相談内容をご記入ください"></textarea></div>
+          <button type="submit" class="btn">送信する →</button>
+          <p class="contact-note" id="pf-contact-status" style="display:none; margin-top:10px;"></p>
+        </form>
+        <div>
+          <p class="contact-note">
+            お仕事のご依頼・ご相談など、お気軽にご連絡ください。<br>
+            内容を確認の上、折り返しご連絡いたします。
+          </p>
+          <div class="art contact-flower">
+            <svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg">
+              <g stroke="#7590ae" stroke-width="1.2" fill="none" opacity="0.8">
+                <path d="M70 130 C 70 90, 60 70, 70 30"/>
+                <circle cx="70" cy="26" r="5"/><circle cx="56" cy="45" r="5"/><circle cx="84" cy="55" r="5"/>
+                <circle cx="58" cy="80" r="4"/><circle cx="82" cy="95" r="4"/>
+              </g>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer class="site-footer">
+    <span class="footer-logo">ao</span>
+    <div class="footer-right">
+      <span>© 2025 ao. All rights reserved.</span>
+      <span class="footer-social"><a href="#">X</a><a href="#">Instagram</a><a href="#">Mail</a></span>
+    </div>
+  </footer>
+
+</div>
+
+<!-- ============ EDITOR ATELIER ============ -->
+<button type="button" class="pf-editor-tab" id="pf-tab">EDIT ・ 編集</button>
+
+<aside class="pf-editor-panel" id="pf-panel">
+  <div class="pf-head">
+    <div>
+      <h2>Atelier</h2>
+      <p class="pf-sub">サイトを自由に編集する</p>
+    </div>
+    <button type="button" class="pf-close-btn" id="pf-close" title="編集パネルを閉じる">✕</button>
+  </div>
+
+  <!-- 背景 -->
+  <div class="pf-section open" data-kind="bg">
+    <button type="button" class="pf-section-head">
+      <span class="en">Background</span><span class="jp">背景</span><span class="arrow">›</span>
+    </button>
+    <div class="pf-section-body">
+      <div class="pf-row pf-color-row">
+        <label style="flex:1;margin:0;">ページ全体の背景色</label>
+        <input type="color" id="pf-bg-outer">
+      </div>
+      <div class="pf-row pf-color-row">
+        <label style="flex:1;margin:0;">紙面（コンテンツ）の背景色</label>
+        <input type="color" id="pf-bg-card">
+      </div>
+      <div class="pf-toggle-row" style="margin-top:22px;">
+        <label>方眼を重ねる</label>
+        <span class="pf-switch">
+          <input type="checkbox" id="pf-grid-toggle">
+          <span class="track"></span><span class="thumb"></span>
+        </span>
+      </div>
+      <div class="pf-subrow pf-disabled" id="pf-grid-controls">
+        <div class="pf-row pf-color-row">
+          <label style="flex:1;margin:0;">方眼の色</label>
+          <input type="color" id="pf-grid-color" value="#33486a">
+        </div>
+        <div class="pf-row">
+          <label>方眼の間隔</label>
+          <div class="pf-range-row">
+            <input type="range" id="pf-grid-size" min="12" max="100" step="2" value="32">
+            <span class="val" id="pf-grid-size-val">32px</span>
+          </div>
+        </div>
+        <div class="pf-row">
+          <label>方眼の濃さ</label>
+          <div class="pf-range-row">
+            <input type="range" id="pf-grid-opacity" min="3" max="60" step="1" value="15">
+            <span class="val" id="pf-grid-opacity-val">15%</span>
+          </div>
+        </div>
+      </div>
+      <button type="button" class="pf-btn ghost" id="pf-bg-reset" style="margin-top:8px;">背景をリセット</button>
+    </div>
+  </div>
+
+  <!-- テキスト -->
+  <div class="pf-section" data-kind="text">
+    <button type="button" class="pf-section-head">
+      <span class="en">Type</span><span class="jp">文字</span><span class="arrow">›</span>
+    </button>
+    <div class="pf-section-body">
+      <p class="pf-hint">見出しや文章をクリックすると選択されます。サイズ・太さ・色を調整できます。</p>
+      <div class="pf-selected-box pf-empty" id="pf-text-box">
+        <p class="empty">まだ何も選択されていません</p>
+        <div class="pf-fields">
+          <p class="snippet" id="pf-text-snippet"></p>
+          <div class="pf-row">
+            <label>文字サイズ</label>
+            <div class="pf-range-row">
+              <input type="range" id="pf-text-size" min="10" max="72" step="1">
+              <span class="val" id="pf-text-size-val"></span>
+            </div>
+          </div>
+          <div class="pf-row">
+            <label>太さ</label>
+            <select id="pf-text-weight">
+              <option value="300">細い</option>
+              <option value="400">標準</option>
+              <option value="500">やや太い</option>
+              <option value="600">太い</option>
+              <option value="700">最も太い</option>
+            </select>
+          </div>
+          <div class="pf-row">
+            <label>フォント</label>
+            <select id="pf-text-font">
+              <option value="">初期設定のまま</option>
+              <option value='"Cormorant Garamond", serif'>Cormorant Garamond（欧文・上品な明朝）</option>
+              <option value='"EB Garamond", serif'>EB Garamond（欧文・クラシック）</option>
+              <option value='"Noto Serif JP", serif'>Noto Serif JP（和文・明朝体）</option>
+              <option value='"Noto Sans JP", sans-serif'>Noto Sans JP（和文・ゴシック体）</option>
+              <option value="Georgia, serif">Georgia（欧文・定番セリフ）</option>
+              <option value="'Helvetica Neue', Arial, sans-serif">Helvetica（欧文・定番ゴシック）</option>
+            </select>
+          </div>
+          <div class="pf-row">
+            <label>配置</label>
+            <div class="pf-btn-row">
+              <button type="button" class="pf-btn ghost pf-align-btn" data-align="left">左</button>
+              <button type="button" class="pf-btn ghost pf-align-btn" data-align="center">中央</button>
+              <button type="button" class="pf-btn ghost pf-align-btn" data-align="right">右</button>
+            </div>
+          </div>
+          <div class="pf-row pf-color-row">
+            <label style="flex:1;margin:0;">文字の色</label>
+            <input type="color" id="pf-text-color">
+          </div>
+          <div class="pf-btn-row" style="margin-top:20px;">
+            <button type="button" class="pf-btn ghost" id="pf-text-edit-content">文章を編集</button>
+            <button type="button" class="pf-btn ghost" id="pf-text-reset">リセット</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 画像 -->
+  <div class="pf-section" data-kind="image">
+    <button type="button" class="pf-section-head">
+      <span class="en">Image</span><span class="jp">図版</span><span class="arrow">›</span>
+    </button>
+    <div class="pf-section-body">
+      <p class="pf-hint">画像の右上に表示されるアイコンから、差し替え・削除ができます。</p>
+      <button type="button" class="pf-btn" id="pf-image-add">＋ 画像を追加</button>
+    </div>
+  </div>
+
+  <!-- 配置・パーツ -->
+  <div class="pf-section" data-kind="layout">
+    <button type="button" class="pf-section-head">
+      <span class="en">Layout</span><span class="jp">配置・パーツ</span><span class="arrow">›</span>
+    </button>
+    <div class="pf-section-body">
+      <p class="pf-hint">テキスト・画像・ボタンを自由な位置に動かしたり、表示アニメーションをつけたりできます。</p>
+      <div class="pf-toggle-row">
+        <label>ドラッグで位置を動かすモード</label>
+        <span class="pf-switch">
+          <input type="checkbox" id="pf-position-toggle">
+          <span class="track"></span><span class="thumb"></span>
+        </span>
+      </div>
+      <p class="pf-hint">オンの間は、テキスト・画像・ボタンをドラッグ、または選択して矢印キー（Shiftで大きく）で動かせます。</p>
+
+      <div class="pf-selected-box pf-empty" id="pf-layout-box" style="margin-top:16px;">
+        <p class="empty">動かしたい要素をクリックして選択してください</p>
+        <div class="pf-fields">
+          <p class="snippet" id="pf-layout-snippet"></p>
+          <div class="pf-row">
+            <label>表示アニメーション</label>
+            <select id="pf-anim-select">
+              <option value="">なし</option>
+              <option value="fade">ふわっと表示</option>
+              <option value="fadeup">下からスライド表示</option>
+              <option value="zoom">ズームして表示</option>
+              <option value="pulse">ずっと拍動する</option>
+              <option value="bounce">ずっと上下に揺れる</option>
+            </select>
+          </div>
+          <div id="pf-widget-fields" style="display:none;">
+            <div class="pf-row">
+              <label>ボタンの文字</label>
+              <input type="text" id="pf-widget-label" placeholder="例）Instagram">
+            </div>
+            <div class="pf-row">
+              <label>リンク先URL</label>
+              <input type="text" id="pf-widget-url" placeholder="https://">
+            </div>
+            <div class="pf-row">
+              <label>アイコン</label>
+              <select id="pf-widget-icon">
+                <option value="link">リンク</option>
+                <option value="x">X（旧Twitter）風</option>
+                <option value="camera">写真（Instagram風）</option>
+                <option value="play">動画（YouTube風）</option>
+                <option value="music">音楽</option>
+                <option value="mail">メール</option>
+                <option value="chat">メッセージ（LINE風）</option>
+              </select>
+            </div>
+          </div>
+          <div class="pf-btn-row" style="margin-top:20px;">
+            <button type="button" class="pf-btn ghost" id="pf-pos-reset">位置をリセット</button>
+            <button type="button" class="pf-btn danger" id="pf-widget-delete" style="display:none;">ボタンを削除</button>
+          </div>
+        </div>
+      </div>
+
+      <button type="button" class="pf-btn" id="pf-widget-add" style="margin-top:4px;">＋ SNS / リンクボタンを追加</button>
+    </div>
+  </div>
+
+  <!-- ページ -->
+  <div class="pf-section" data-kind="page">
+    <button type="button" class="pf-section-head">
+      <span class="en">Pages</span><span class="jp">頁の構成</span><span class="arrow">›</span>
+    </button>
+    <div class="pf-section-body">
+      <div class="pf-page-list" id="pf-page-list"></div>
+      <p class="pf-hint" style="margin-bottom:8px;">新しいページを追加：</p>
+      <form class="pf-add-page" id="pf-add-page-form">
+        <input type="text" id="pf-new-page-title" placeholder="例）Gallery">
+        <button type="submit">追加</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- 画像保護 -->
+  <div class="pf-section" data-kind="protect">
+    <button type="button" class="pf-section-head">
+      <span class="en">Protect</span><span class="jp">画像保護</span><span class="arrow">›</span>
+    </button>
+    <div class="pf-section-body">
+      <p class="pf-hint">スクリーンショット自体は技術的に防げませんが、無断保存への抑止力にはなります。</p>
+
+      <div class="pf-toggle-row">
+        <label>右クリック・長押し保存を抑制する</label>
+        <span class="pf-switch">
+          <input type="checkbox" id="pf-nosave-toggle">
+          <span class="track"></span><span class="thumb"></span>
+        </span>
+      </div>
+      <p class="pf-hint">画像の右クリック保存・スマホの長押し保存・ドラッグでの保存を弱く抑止します（完全な防止ではありません）。</p>
+
+      <div class="pf-toggle-row" style="margin-top:16px;">
+        <label>透かしを表示する</label>
+        <span class="pf-switch">
+          <input type="checkbox" id="pf-watermark-toggle">
+          <span class="track"></span><span class="thumb"></span>
+        </span>
+      </div>
+      <div class="pf-row" style="margin-top:12px;">
+        <label>透かしの文字</label>
+        <input type="text" id="pf-watermark-text" placeholder="例）© ao">
+      </div>
+      <p class="pf-hint">全ての作品画像に斜めの透かし文字を敷きます。スクリーンショットにも写り込むので、保存対策として一番確実です。</p>
+    </div>
+  </div>
+
+  <!-- 公開設定 -->
+  <div class="pf-section" data-kind="publish">
+    <button type="button" class="pf-section-head">
+      <span class="en">Publish</span><span class="jp">公開設定</span><span class="arrow">›</span>
+    </button>
+    <div class="pf-section-body">
+      <p class="pf-hint">実際にネットに公開するときに使う設定です。</p>
+
+      <div class="pf-row">
+        <label>お問い合わせの送信先メールアドレス</label>
+        <input type="text" id="pf-contact-mailto" placeholder="your@email.com">
+      </div>
+      <p class="pf-hint">未設定の場合、送信ボタンを押すとメールアプリが開いて内容が自動入力されます。Formspree等のフォーム送信サービスをお使いの場合は下にエンドポイントを入力すると、ページを離れずに送信できます。</p>
+      <div class="pf-row">
+        <label>フォーム送信エンドポイント（任意・Formspree等）</label>
+        <input type="text" id="pf-contact-endpoint" placeholder="https://formspree.io/f/xxxxxxx">
+      </div>
+
+      <div class="pf-row" style="margin-top:18px;">
+        <label>検索結果・SNSシェア用の説明文</label>
+        <input type="text" id="pf-meta-desc-input" placeholder="サイトの説明文（100字程度推奨）">
+      </div>
+      <div class="pf-row">
+        <label>シェア用画像URL（任意・og:image）</label>
+        <input type="text" id="pf-og-image-input" placeholder="https://.../thumbnail.jpg">
+      </div>
+      <p class="pf-hint">SNSでシェアされた時のサムネイルです。実際に公開後の画像URLを指定してください（このHTML内の画像は指定できません）。</p>
+
+      <div class="pf-row" style="margin-top:18px;">
+        <label>ファビコン（タブに出る小さいアイコン・絵文字1文字）</label>
+        <input type="text" id="pf-favicon-input" placeholder="🎨" maxlength="4">
+      </div>
+
+      <div class="pf-btn-row" style="margin-top:22px;">
+        <button type="button" class="pf-btn ghost" id="pf-check-size">ファイルサイズを確認</button>
+      </div>
+      <p class="pf-hint" id="pf-size-result"></p>
+    </div>
+  </div>
+
+  <div class="pf-editor-footer" style="margin-top:26px; border-top:1px solid var(--line); padding-top:26px;">
+    <button type="button" class="pf-btn" id="pf-export">編集用HTMLとして保存する</button>
+    <p class="pf-hint" style="margin:8px 0 14px;">編集エディターを含んだまま保存します。続きを編集する時はこちらのファイルを開いてください。</p>
+    <button type="button" class="pf-btn" id="pf-export-clean">公開用HTML（編集機能なし）を保存する</button>
+    <p class="pf-hint" style="margin:8px 0 0;">実際にネットに公開する時はこちらを使ってください。訪問者には編集パネルが表示されません。</p>
+    <button type="button" class="pf-btn danger" id="pf-reset-all" style="margin-top:20px;">すべての変更を取り消す</button>
+  </div>
+</aside>
+
+<input type="file" id="pf-file-input" accept="image/*" style="display:none;">
+
+<script>
+function showPage(name){
+  if(window.__pfFullyDeselectText) window.__pfFullyDeselectText();
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.getElementById('view-' + name).classList.add('active');
+  document.querySelectorAll('[data-page]').forEach(b => b.classList.toggle('current', b.dataset.page === name));
+  document.getElementById('menu-toggle').checked = false;
+  window.scrollTo(0,0);
+}
+</script>
+
+<!-- ================================================================
+   SITE RUNTIME — kept even in the public (editor-free) export.
+   Handles entrance animations and the contact form.
+   ================================================================ -->
+<script id="pf-site-runtime">
+(function(){
+  /* ---- entrance / attention animations ---- */
+  window.__pfAnimObserver = ('IntersectionObserver' in window) ? new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        entry.target.classList.add('pf-anim-play');
+        window.__pfAnimObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold:0.2 }) : null;
+
+  window.__pfApplyAnim = function(el, value){
+    ['pf-anim-fade','pf-anim-fadeup','pf-anim-zoom','pf-anim-pulse','pf-anim-bounce','pf-anim-play'].forEach(function(c){
+      el.classList.remove(c);
+    });
+    if(window.__pfAnimObserver) window.__pfAnimObserver.unobserve(el);
+    if(!value){ delete el.dataset.pfAnim; return; }
+    el.dataset.pfAnim = value;
+    el.classList.add('pf-anim-' + value);
+    if(value === 'fade' || value === 'fadeup' || value === 'zoom'){
+      if(window.__pfAnimObserver) window.__pfAnimObserver.observe(el);
+      else el.classList.add('pf-anim-play');
+    }
+  };
+
+  document.querySelectorAll('[data-pf-anim]').forEach(function(el){
+    var v = el.dataset.pfAnim;
+    if((v === 'fade' || v === 'fadeup' || v === 'zoom') && window.__pfAnimObserver){
+      window.__pfAnimObserver.observe(el);
+    } else if(v === 'pulse' || v === 'bounce'){
+      el.classList.add('pf-anim-' + v);
+    }
+  });
+
+  /* ---- image protection: watermark overlay + save deterrents ---- */
+  function escapeXml(s){
+    return String(s).replace(/[<>&'"]/g, function(c){
+      return { '<':'&lt;', '>':'&gt;', '&':'&amp;', "'":'&apos;', '"':'&quot;' }[c];
+    });
+  }
+  function buildWatermarkUri(text){
+    var svg = '<svg xmlns="http://www.w3.org/2000/svg" width="220" height="150">' +
+      '<text x="0" y="80" font-family="EB Garamond, Georgia, serif" font-size="22" fill="rgba(255,255,255,0.85)" transform="rotate(-28 110 75)">' +
+      escapeXml(text) + '</text></svg>';
+    return 'url("data:image/svg+xml,' + encodeURIComponent(svg) + '")';
+  }
+  function ensureWatermarkLayers(){
+    document.querySelectorAll('.art').forEach(function(art){
+      if(!art.querySelector(':scope > .pf-wm-layer')){
+        var layer = document.createElement('div');
+        layer.className = 'pf-wm-layer';
+        art.appendChild(layer);
+      }
+    });
+  }
+  window.__pfSetWatermark = function(enabled, text){
+    document.body.classList.toggle('pf-watermark-on', !!enabled);
+    document.body.dataset.pfWatermarkOn = enabled ? '1' : '0';
+    if(text !== undefined) document.body.dataset.pfWatermarkText = text;
+    ensureWatermarkLayers();
+    var t = document.body.dataset.pfWatermarkText || '';
+    var uri = t ? buildWatermarkUri(t) : '';
+    document.querySelectorAll('.pf-wm-layer').forEach(function(l){ l.style.backgroundImage = uri; });
+  };
+  if(document.body.dataset.pfWatermarkOn === '1'){
+    window.__pfSetWatermark(true, document.body.dataset.pfWatermarkText || '');
+  }
+
+  window.__pfSetNoSaveMode = function(enabled){
+    document.body.classList.toggle('pf-no-save-mode', !!enabled);
+    document.body.dataset.pfNoSave = enabled ? '1' : '0';
+  };
+  if(document.body.dataset.pfNoSave === '1') window.__pfSetNoSaveMode(true);
+
+  document.addEventListener('contextmenu', function(e){
+    if(document.body.classList.contains('pf-no-save-mode') && e.target.closest('.art')) e.preventDefault();
+  });
+  document.addEventListener('dragstart', function(e){
+    if(document.body.classList.contains('pf-no-save-mode') && e.target.closest('.art')) e.preventDefault();
+  });
+
+  /* ---- favicon (emoji-based, drawn to a small canvas) ---- */
+  window.__pfSetFavicon = function(emoji){
+    if(!emoji) return;
+    try{
+      var canvas = document.createElement('canvas');
+      canvas.width = 64; canvas.height = 64;
+      var ctx = canvas.getContext('2d');
+      ctx.font = '52px serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(emoji, 32, 36);
+      var link = document.getElementById('pf-favicon-link');
+      if(link) link.href = canvas.toDataURL('image/png');
+    }catch(e){}
+  };
+  var existingFavicon = document.getElementById('pf-favicon-link');
+  if(existingFavicon && !existingFavicon.getAttribute('href')){
+    window.__pfSetFavicon('🎨');
+  }
+
+  /* ---- contact form ---- */
+  var form = document.getElementById('pf-contact-form');
+  if(form){
+    var statusEl = document.getElementById('pf-contact-status');
+    function showStatus(msg, isError){
+      if(!statusEl) return;
+      statusEl.textContent = msg;
+      statusEl.style.display = '';
+      statusEl.style.color = isError ? '#b3432f' : '';
+    }
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var nameEl = document.getElementById('name');
+      var emailEl = document.getElementById('email');
+      var messageEl = document.getElementById('message');
+      var name = nameEl ? nameEl.value.trim() : '';
+      var email = emailEl ? emailEl.value.trim() : '';
+      var message = messageEl ? messageEl.value.trim() : '';
+      if(!email || !message){
+        showStatus('メールアドレスとお問い合わせ内容をご入力ください。', true);
+        return;
+      }
+      var endpoint = form.dataset.endpoint;
+      if(endpoint){
+        showStatus('送信中…');
+        fetch(endpoint, {
+          method:'POST',
+          headers:{ 'Accept':'application/json', 'Content-Type':'application/json' },
+          body: JSON.stringify({ name:name, email:email, message:message })
+        }).then(function(res){
+          if(res.ok){
+            form.reset();
+            showStatus('送信しました。ありがとうございます。');
+          } else {
+            showStatus('送信に失敗しました。時間をおいて再度お試しください。', true);
+          }
+        }).catch(function(){
+          showStatus('送信に失敗しました。通信環境をご確認ください。', true);
+        });
+      } else {
+        var to = form.dataset.mailto || '';
+        if(!to){
+          showStatus('送信先が未設定です。サイト管理者にお問い合わせください。', true);
+          return;
+        }
+        var subject = encodeURIComponent('ポートフォリオサイトからのお問い合わせ');
+        var body = encodeURIComponent('お名前：' + name + '\n\n' + message + '\n\n返信先：' + email);
+        window.location.href = 'mailto:' + to + '?subject=' + subject + '&body=' + body;
+        showStatus('メールアプリが開きます。内容を確認して送信してください。');
+      }
+    });
+  }
+})();
+</script>
+
+<!-- ================================================================
+   EDITOR ATELIER — logic
+   ================================================================ -->
+<script id="pf-editor-script">
+(function(){
+
+  var TEXT_SELECTOR = [
+    '.logo', '.section-title-en', '.section-title-jp', '.section-desc',
+    '.hero-copy h1', '.hero-copy .tagline', '.hero-copy p',
+    '.works-preview .label', '.char-name', '.char-tag',
+    '.about-name', '.about-role', '.about-text',
+    '.contact-note', '.field label', '.footer-logo',
+    '.footer-right span', '.pf-page-title-en', '.pf-page-title-jp', '.pf-page-text'
+  ].join(',');
+
+  var PF = { textMode:false, imageMode:false, selectedEl:null, pageSeq:0, dirty:false };
+
+  function markDirty(){ PF.dirty = true; }
+
+  window.addEventListener('beforeunload', function(e){
+    if(PF.dirty){ e.preventDefault(); e.returnValue = ''; }
+  });
+
+  function hexToRgba(hex, alphaPct){
+    var m = hex.replace('#','');
+    if(m.length === 3){ m = m.split('').map(function(c){ return c+c; }).join(''); }
+    var r = parseInt(m.substr(0,2),16), g = parseInt(m.substr(2,2),16), b = parseInt(m.substr(4,2),16);
+    return 'rgba('+r+','+g+','+b+','+(alphaPct/100)+')';
+  }
+  function rgbToHex(rgb){
+    var m = rgb.match(/\d+/g);
+    if(!m) return '#000000';
+    return '#' + m.slice(0,3).map(function(x){ return (+x).toString(16).padStart(2,'0'); }).join('');
+  }
+
+  function tagEditableText(root){
+    (root || document).querySelectorAll(TEXT_SELECTOR).forEach(function(el){
+      el.classList.add('pf-editable-text', 'pf-draggable');
+    });
+  }
+
+  /* ---------- drawer open / close ---------- */
+  var tab = document.getElementById('pf-tab');
+  var closeBtn = document.getElementById('pf-close');
+
+  function setDrawerOpen(open){
+    document.body.classList.toggle('pf-editor-open', open);
+    tab.textContent = open ? '✕ 閉じる' : (PF.positionMode ? '編集を再開 ▲' : 'EDIT ・ 編集');
+    if(!open){
+      document.body.classList.remove('pf-text-mode','pf-image-mode');
+      PF.textMode = false; PF.imageMode = false;
+      // 「編集を終了」を押さずにパネルを閉じても、編集中の見た目（金色の枠）が
+      // 残り続けないよう、ここで必ず後始末する
+      fullyDeselectText();
+    } else {
+      var openSec = document.querySelector('.pf-section.open');
+      if(openSec) syncModeFromSection(openSec);
+    }
+  }
+
+  tab.addEventListener('click', function(){
+    setDrawerOpen(!document.body.classList.contains('pf-editor-open'));
+  });
+  closeBtn.addEventListener('click', function(){
+    setDrawerOpen(false);
+  });
+
+  function syncModeFromSection(sec){
+    document.body.classList.remove('pf-text-mode','pf-image-mode');
+    PF.textMode = false; PF.imageMode = false;
+    var kind = sec.dataset.kind;
+    if(kind === 'text'){ PF.textMode = true; document.body.classList.add('pf-text-mode'); }
+    if(kind === 'image'){ PF.imageMode = true; document.body.classList.add('pf-image-mode'); }
+  }
+
+  document.querySelectorAll('.pf-section-head').forEach(function(head){
+    head.addEventListener('click', function(){
+      var sec = head.closest('.pf-section');
+      var wasOpen = sec.classList.contains('open');
+      document.querySelectorAll('.pf-section').forEach(function(s){ s.classList.remove('open'); });
+      document.body.classList.remove('pf-text-mode','pf-image-mode');
+      PF.textMode = false; PF.imageMode = false;
+      if(!wasOpen){
+        sec.classList.add('open');
+        syncModeFromSection(sec);
+      }
+    });
+  });
+
+  /* ---------- background & grid ---------- */
+  var bgOuter = document.getElementById('pf-bg-outer');
+  var bgCard = document.getElementById('pf-bg-card');
+  var gridToggle = document.getElementById('pf-grid-toggle');
+  var gridControls = document.getElementById('pf-grid-controls');
+  var gridColor = document.getElementById('pf-grid-color');
+  var gridSize = document.getElementById('pf-grid-size');
+  var gridSizeVal = document.getElementById('pf-grid-size-val');
+  var gridOpacity = document.getElementById('pf-grid-opacity');
+  var gridOpacityVal = document.getElementById('pf-grid-opacity-val');
+  var pageEl = document.querySelector('.page');
+
+  var rootStyles = getComputedStyle(document.documentElement);
+  bgOuter.value = rgbToHex(rootStyles.getPropertyValue('--bg').trim() || '#edf1f5');
+  bgCard.value = '#f7f9fb';
+  try {
+    var probe = document.createElement('span');
+    probe.style.color = rootStyles.getPropertyValue('--bg');
+    document.body.appendChild(probe);
+    bgOuter.value = rgbToHex(getComputedStyle(probe).color);
+    probe.style.color = rootStyles.getPropertyValue('--card');
+    bgCard.value = rgbToHex(getComputedStyle(probe).color);
+    probe.remove();
+  } catch(e){}
+
+  bgOuter.addEventListener('input', function(){
+    document.documentElement.style.setProperty('--bg', bgOuter.value);
+    markDirty();
+  });
+  bgCard.addEventListener('input', function(){
+    document.documentElement.style.setProperty('--card', bgCard.value);
+    markDirty();
+  });
+
+  function updateGridVars(){
+    pageEl.style.setProperty('--edit-grid-color', hexToRgba(gridColor.value, gridOpacity.value));
+    pageEl.style.setProperty('--edit-grid-size', gridSize.value + 'px');
+    gridSizeVal.textContent = gridSize.value + 'px';
+    gridOpacityVal.textContent = gridOpacity.value + '%';
+  }
+  gridToggle.addEventListener('change', function(){
+    pageEl.classList.toggle('pf-grid-on', gridToggle.checked);
+    gridControls.classList.toggle('pf-disabled', !gridToggle.checked);
+    updateGridVars();
+    markDirty();
+  });
+  [gridColor, gridSize, gridOpacity].forEach(function(input){
+    input.addEventListener('input', function(){ updateGridVars(); markDirty(); });
+  });
+  updateGridVars();
+
+  document.getElementById('pf-bg-reset').addEventListener('click', function(){
+    document.documentElement.style.removeProperty('--bg');
+    document.documentElement.style.removeProperty('--card');
+    pageEl.classList.remove('pf-grid-on');
+    gridToggle.checked = false;
+    gridControls.classList.add('pf-disabled');
+    gridColor.value = '#33486a'; gridSize.value = 32; gridOpacity.value = 15;
+    updateGridVars();
+    var probe2 = document.createElement('span');
+    probe2.style.color = getComputedStyle(document.documentElement).getPropertyValue('--bg');
+    document.body.appendChild(probe2);
+    bgOuter.value = rgbToHex(getComputedStyle(probe2).color);
+    probe2.style.color = getComputedStyle(document.documentElement).getPropertyValue('--card');
+    bgCard.value = rgbToHex(getComputedStyle(probe2).color);
+    probe2.remove();
+    markDirty();
+  });
+
+  /* ---------- text ---------- */
+  var textBox = document.getElementById('pf-text-box');
+  var textSnippet = document.getElementById('pf-text-snippet');
+  var textSize = document.getElementById('pf-text-size');
+  var textSizeVal = document.getElementById('pf-text-size-val');
+  var textWeight = document.getElementById('pf-text-weight');
+  var textFont = document.getElementById('pf-text-font');
+  var textAlignBtns = document.querySelectorAll('.pf-align-btn');
+  var textColor = document.getElementById('pf-text-color');
+  var textEditContentBtn = document.getElementById('pf-text-edit-content');
+  var textResetBtn = document.getElementById('pf-text-reset');
+
+  function nearestWeight(w){
+    var options = [300,400,500,600,700];
+    var num = parseInt(w,10) || 400;
+    return options.reduce(function(a,b){ return Math.abs(b-num) < Math.abs(a-num) ? b : a; });
+  }
+
+  function stopEditingSelected(){
+    if(PF.selectedEl && PF.selectedEl.getAttribute('contenteditable') === 'true'){
+      PF.selectedEl.removeAttribute('contenteditable');
+      PF.selectedEl.classList.remove('pf-editing');
+      PF.selectedEl.blur();
+      textEditContentBtn.textContent = '文章を編集';
+    }
+  }
+
+  function fullyDeselectText(){
+    stopEditingSelected();
+    if(PF.selectedEl){
+      PF.selectedEl.classList.remove('pf-selected');
+      PF.selectedEl = null;
+    }
+    if(textBox) textBox.classList.add('pf-empty');
+  }
+
+  function selectTextEl(el){
+    stopEditingSelected();
+    if(PF.selectedEl) PF.selectedEl.classList.remove('pf-selected');
+    PF.selectedEl = el;
+    el.classList.add('pf-selected');
+    textBox.classList.remove('pf-empty');
+    var cs = getComputedStyle(el);
+    var size = parseInt(cs.fontSize, 10);
+    textSize.value = size; textSizeVal.textContent = size + 'px';
+    textWeight.value = nearestWeight(cs.fontWeight);
+    textColor.value = rgbToHex(cs.color);
+    textFont.value = el.style.fontFamily || '';
+    var align = el.style.textAlign || cs.textAlign || 'left';
+    textAlignBtns.forEach(function(b){ b.classList.toggle('active', b.dataset.align === align); });
+    textSnippet.textContent = (el.textContent || '').trim().slice(0, 70);
+  }
+
+  tagEditableText(document);
+
+  document.addEventListener('click', function(e){
+    if(!PF.textMode) return;
+    var el = e.target.closest('.pf-editable-text');
+    if(el){
+      // すでに編集中の要素内のクリックは、カーソル位置を変えるための通常の操作。
+      // ここで編集を終了させてしまうと「1文字消すたびに編集が終わる」原因になるため、
+      // 編集中はブラウザ標準のクリック（カーソル移動）に任せる。
+      if(el === PF.selectedEl && el.getAttribute('contenteditable') === 'true'){
+        e.stopPropagation();
+        return;
+      }
+      e.preventDefault();
+      e.stopPropagation();
+      selectTextEl(el);
+    }
+  }, true);
+
+  textSize.addEventListener('input', function(){
+    if(!PF.selectedEl) return;
+    PF.selectedEl.style.fontSize = textSize.value + 'px';
+    textSizeVal.textContent = textSize.value + 'px';
+    markDirty();
+  });
+  textWeight.addEventListener('change', function(){
+    if(!PF.selectedEl) return;
+    PF.selectedEl.style.fontWeight = textWeight.value;
+    markDirty();
+  });
+  textColor.addEventListener('input', function(){
+    if(!PF.selectedEl) return;
+    PF.selectedEl.style.color = textColor.value;
+    markDirty();
+  });
+  textFont.addEventListener('change', function(){
+    if(!PF.selectedEl) return;
+    PF.selectedEl.style.fontFamily = textFont.value;
+    markDirty();
+  });
+  textAlignBtns.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      if(!PF.selectedEl) return;
+      PF.selectedEl.style.textAlign = btn.dataset.align;
+      textAlignBtns.forEach(function(b){ b.classList.toggle('active', b === btn); });
+      markDirty();
+    });
+  });
+  textEditContentBtn.addEventListener('click', function(){
+    if(!PF.selectedEl) return;
+    var editing = PF.selectedEl.getAttribute('contenteditable') === 'true';
+    if(editing){
+      fullyDeselectText();
+    } else {
+      PF.selectedEl.setAttribute('contenteditable', 'true');
+      PF.selectedEl.classList.add('pf-editing');
+      PF.selectedEl.focus();
+      textEditContentBtn.textContent = '編集を終了';
+      markDirty();
+    }
+  });
+  textResetBtn.addEventListener('click', function(){
+    if(!PF.selectedEl) return;
+    PF.selectedEl.style.fontSize = '';
+    PF.selectedEl.style.fontWeight = '';
+    PF.selectedEl.style.color = '';
+    PF.selectedEl.style.fontFamily = '';
+    PF.selectedEl.style.textAlign = '';
+    selectTextEl(PF.selectedEl);
+    markDirty();
+  });
+
+  /* ---------- images ---------- */
+  var fileInput = document.getElementById('pf-file-input');
+  var pendingArt = null;
+
+  function attachArtToolbar(art){
+    art.classList.add('pf-draggable');
+    if(art.querySelector('.pf-image-toolbar')) return;
+    var bar = document.createElement('div');
+    bar.className = 'pf-image-toolbar';
+    bar.innerHTML =
+      '<button type="button" class="change" title="画像を差し替える">⇄</button>' +
+      '<button type="button" class="del" title="削除する">✕</button>';
+    bar.querySelector('.change').addEventListener('click', function(e){
+      e.stopPropagation();
+      pendingArt = art;
+      fileInput.click();
+    });
+    bar.querySelector('.del').addEventListener('click', function(e){
+      e.stopPropagation();
+      if(confirm('この画像を削除しますか？')){
+        art.remove();
+        markDirty();
+      }
+    });
+
+    // Worksページの作品には、タブ（ALL/ILLUSTRATION/CHARACTER/CLIENT）で絞り込むための
+    // カテゴリ選択を追加する。
+    if(art.closest('#view-works .grid')){
+      if(!art.dataset.category) art.dataset.category = 'illustration';
+      var catSelect = document.createElement('select');
+      catSelect.className = 'pf-cat-select';
+      catSelect.title = 'カテゴリを選択';
+      [['illustration','ILLUSTRATION'], ['character','CHARACTER'], ['client','CLIENT']].forEach(function(opt){
+        var o = document.createElement('option');
+        o.value = opt[0]; o.textContent = opt[1];
+        if(art.dataset.category === opt[0]) o.selected = true;
+        catSelect.appendChild(o);
+      });
+      catSelect.addEventListener('click', function(e){ e.stopPropagation(); });
+      catSelect.addEventListener('change', function(e){
+        e.stopPropagation();
+        art.dataset.category = catSelect.value;
+        applyWorksFilter();
+        markDirty();
+      });
+      bar.appendChild(catSelect);
+    }
+
+    art.insertBefore(bar, art.firstChild);
+  }
+
+  function applyWorksFilter(){
+    var activeTab = document.querySelector('#view-works .filter-tabs .active');
+    var filter = activeTab ? activeTab.dataset.filter : 'all';
+    document.querySelectorAll('#view-works .grid .art').forEach(function(item){
+      var show = (filter === 'all') || (item.dataset.category === filter);
+      item.style.display = show ? '' : 'none';
+    });
+  }
+
+  document.querySelectorAll('.filter-tabs [data-filter]').forEach(function(tabEl){
+    tabEl.addEventListener('click', function(){
+      document.querySelectorAll('.filter-tabs [data-filter]').forEach(function(t){ t.classList.remove('active'); });
+      tabEl.classList.add('active');
+      applyWorksFilter();
+    });
+  });
+
+  document.querySelectorAll('.art').forEach(attachArtToolbar);
+
+  document.querySelectorAll('.works-preview .strip .art, .works-preview .strip-arrow').forEach(function(el){
+    el.addEventListener('click', function(){
+      if(PF.imageMode || PF.positionMode) return; // editing this image takes priority over navigation
+      showPage('works');
+    });
+  });
+
+  /* ---------- work detail page ---------- */
+  var workDetailSlot = document.getElementById('work-detail-art-slot');
+  var workDetailTitle = document.getElementById('work-detail-title');
+  var workDetailDesc = document.getElementById('work-detail-desc');
+  PF.workDetail = null;
+  PF.workSeq = 0;
+
+  function ensureWorkMeta(art){
+    if(!art.dataset.workTitle){
+      PF.workSeq++;
+      art.dataset.workTitle = 'Work ' + String(PF.workSeq).padStart(2, '0');
+    }
+    if(!art.dataset.workDesc){
+      art.dataset.workDesc = 'ここに作品の説明文を入力してください。';
+    }
+  }
+
+  function openWorkDetail(art){
+    if(PF.imageMode || PF.textMode || PF.positionMode) return; // 編集中は詳細ページに飛ばさない
+    ensureWorkMeta(art);
+    PF.workDetail = { el: art, parent: art.parentNode, next: art.nextSibling };
+    workDetailSlot.appendChild(art);
+    workDetailTitle.textContent = art.dataset.workTitle;
+    workDetailDesc.textContent = art.dataset.workDesc;
+    showPage('work-detail');
+  }
+
+  function closeWorkDetail(){
+    if(PF.workDetail){
+      // タイトル・説明文の編集内容を作品側に保存してから元の場所に戻す
+      PF.workDetail.el.dataset.workTitle = (workDetailTitle.textContent || '').trim() || PF.workDetail.el.dataset.workTitle;
+      PF.workDetail.el.dataset.workDesc = (workDetailDesc.textContent || '').trim() || PF.workDetail.el.dataset.workDesc;
+      if(PF.workDetail.next && PF.workDetail.next.parentNode === PF.workDetail.parent){
+        PF.workDetail.parent.insertBefore(PF.workDetail.el, PF.workDetail.next);
+      } else {
+        PF.workDetail.parent.appendChild(PF.workDetail.el);
+      }
+      PF.workDetail = null;
+    }
+    showPage('works');
+  }
+  window.closeWorkDetail = closeWorkDetail;
+
+  function attachWorkClickNav(art){
+    art.addEventListener('click', function(e){
+      if(e.target.closest('.pf-image-toolbar')) return;
+      openWorkDetail(art);
+    });
+  }
+  document.querySelectorAll('#view-works .grid .art').forEach(attachWorkClickNav);
+
+  /* ---------- character detail page ---------- */
+  var charDetailSlot = document.getElementById('character-detail-art-slot');
+  var charDetailName = document.getElementById('character-detail-name');
+  var charDetailTag = document.getElementById('character-detail-tag');
+  var charDetailBio = document.getElementById('character-detail-bio');
+  PF.charDetail = null;
+
+  function openCharacterDetail(card){
+    if(PF.imageMode || PF.textMode || PF.positionMode) return; // 編集中は詳細ページに飛ばさない
+    var art = card.querySelector('.art');
+    var nameEl = card.querySelector('.char-name');
+    var tagEl = card.querySelector('.char-tag');
+    if(!art) return;
+    if(!card.dataset.bio) card.dataset.bio = 'ここにキャラクターの詳しい紹介文を入力してください。';
+    PF.charDetail = { card: card, art: art, artParent: art.parentNode, artNext: art.nextSibling };
+    charDetailSlot.appendChild(art);
+    charDetailName.textContent = nameEl ? nameEl.textContent : '';
+    charDetailTag.textContent = tagEl ? tagEl.textContent : '';
+    charDetailBio.textContent = card.dataset.bio;
+    showPage('character-detail');
+  }
+
+  function closeCharacterDetail(){
+    if(PF.charDetail){
+      var nameEl = PF.charDetail.card.querySelector('.char-name');
+      var tagEl = PF.charDetail.card.querySelector('.char-tag');
+      if(nameEl) nameEl.textContent = (charDetailName.textContent || '').trim() || nameEl.textContent;
+      if(tagEl) tagEl.textContent = (charDetailTag.textContent || '').trim() || tagEl.textContent;
+      PF.charDetail.card.dataset.bio = (charDetailBio.textContent || '').trim() || PF.charDetail.card.dataset.bio;
+      if(PF.charDetail.artNext && PF.charDetail.artNext.parentNode === PF.charDetail.artParent){
+        PF.charDetail.artParent.insertBefore(PF.charDetail.art, PF.charDetail.artNext);
+      } else {
+        PF.charDetail.artParent.appendChild(PF.charDetail.art);
+      }
+      PF.charDetail = null;
+    }
+    showPage('characters');
+  }
+  window.closeCharacterDetail = closeCharacterDetail;
+
+  document.querySelectorAll('#view-characters .grid .char-card').forEach(function(card){
+    card.addEventListener('click', function(e){
+      if(e.target.closest('.pf-image-toolbar')) return;
+      openCharacterDetail(card);
+    });
+  });
+
+  fileInput.addEventListener('change', function(){
+    var file = fileInput.files && fileInput.files[0];
+    if(!file || !pendingArt) return;
+    var reader = new FileReader();
+    reader.onload = function(ev){
+      var svg = pendingArt.querySelector('svg');
+      if(svg) svg.style.display = 'none';
+      pendingArt.style.backgroundImage = 'url(' + ev.target.result + ')';
+      pendingArt.style.backgroundSize = 'cover';
+      pendingArt.style.backgroundPosition = 'center';
+      markDirty();
+    };
+    reader.readAsDataURL(file);
+    fileInput.value = '';
+    pendingArt = null;
+  });
+
+  document.getElementById('pf-image-add').addEventListener('click', function(){
+    var activeView = document.querySelector('.view.active');
+    if(!activeView) return;
+    var art = document.createElement('div');
+    var grid = activeView.querySelector('.grid');
+    art.className = 'art' + (grid ? '' : ' wide');
+    attachArtToolbar(art);
+    if(activeView.id === 'view-works'){
+      attachWorkClickNav(art);
+    }
+    if(grid){
+      grid.appendChild(art);
+    } else {
+      var holder = activeView.querySelector('.pf-image-holder');
+      if(!holder){
+        holder = document.createElement('div');
+        holder.className = 'pf-image-holder';
+        holder.style.display = 'grid';
+        holder.style.gridTemplateColumns = 'repeat(2, 1fr)';
+        holder.style.gap = '14px';
+        holder.style.marginTop = '30px';
+        var section = activeView.querySelector('.section') || activeView;
+        section.appendChild(holder);
+      }
+      holder.appendChild(art);
+    }
+    art.scrollIntoView({ behavior:'smooth', block:'center' });
+    markDirty();
+  });
+
+  /* ---------- layout: free drag positioning, widget buttons, animations ---------- */
+  PF.positionMode = false;
+  PF.layoutEl = null;
+
+  var posToggle = document.getElementById('pf-position-toggle');
+  var layoutBox = document.getElementById('pf-layout-box');
+  var layoutSnippet = document.getElementById('pf-layout-snippet');
+  var animSelect = document.getElementById('pf-anim-select');
+  var widgetFields = document.getElementById('pf-widget-fields');
+  var widgetLabelInput = document.getElementById('pf-widget-label');
+  var widgetUrlInput = document.getElementById('pf-widget-url');
+  var widgetIconSelect = document.getElementById('pf-widget-icon');
+  var posResetBtn = document.getElementById('pf-pos-reset');
+  var widgetDeleteBtn = document.getElementById('pf-widget-delete');
+  var widgetAddBtn = document.getElementById('pf-widget-add');
+
+  var PF_ICONS = {
+    link:   '<svg viewBox="0 0 24 24"><path d="M3.9 12a5 5 0 0 1 5-5h3v2h-3a3 3 0 1 0 0 6h3v2h-3a5 5 0 0 1-5-5zm7-1h4v2h-4v-2zm3-4h3a5 5 0 0 1 0 10h-3v-2h3a3 3 0 1 0 0-6h-3V7z"/></svg>',
+    x:      '<svg viewBox="0 0 24 24"><path d="M4 4l7.5 8.3L4.4 20h2.3l6-6.6 4.6 6.6H21l-7.8-8.7L20 4h-2.3l-5.5 6-4.3-6H4z"/></svg>',
+    camera: '<svg viewBox="0 0 24 24"><path d="M9 4L7.5 6H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-2.5L15 4H9zm3 5a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/></svg>',
+    play:   '<svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-2 5l7 5-7 5V7z"/></svg>',
+    music:  '<svg viewBox="0 0 24 24"><path d="M9 3v10.55A4 4 0 1 0 11 17V7h6V3H9z"/></svg>',
+    mail:   '<svg viewBox="0 0 24 24"><path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm1.4 2L12 12.5 19.6 7H4.4zM4 8.4V18h16V8.4l-8 5.6-8-5.6z"/></svg>',
+    chat:   '<svg viewBox="0 0 24 24"><path d="M4 4h16a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H9l-4.5 4V17H4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1z"/></svg>'
+  };
+  function setWidgetIcon(el, key){
+    var holder = el.querySelector('.pf-widget-icon');
+    if(!holder) return;
+    el.dataset.icon = key;
+    holder.innerHTML = PF_ICONS[key] || PF_ICONS.link;
+  }
+
+  var animObserver = ('IntersectionObserver' in window) ? new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        entry.target.classList.add('pf-anim-play');
+        animObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold:0.2 }) : null;
+
+  function applyAnim(el, value){
+    if(window.__pfApplyAnim){ window.__pfApplyAnim(el, value); return; }
+    // フォールバック（サイト共通ランタイムが読み込めていない場合のみ使用）
+    ['pf-anim-fade','pf-anim-fadeup','pf-anim-zoom','pf-anim-pulse','pf-anim-bounce','pf-anim-play'].forEach(function(c){
+      el.classList.remove(c);
+    });
+    if(animObserver) animObserver.unobserve(el);
+    if(!value){ delete el.dataset.pfAnim; return; }
+    el.dataset.pfAnim = value;
+    el.classList.add('pf-anim-' + value);
+    if(value === 'fade' || value === 'fadeup' || value === 'zoom'){
+      if(animObserver) animObserver.observe(el);
+      else el.classList.add('pf-anim-play');
+    }
+  }
+
+  function describeLayoutEl(el){
+    if(el.classList.contains('pf-widget-btn')){
+      var lbl = el.querySelector('.pf-widget-label');
+      return 'ボタン：' + (lbl ? lbl.textContent : '');
+    }
+    if(el.classList.contains('art')) return '画像';
+    return (el.textContent || '').trim().slice(0, 60) || 'テキスト要素';
+  }
+
+  function selectLayoutEl(el){
+    if(PF.layoutEl) PF.layoutEl.classList.remove('pf-selected');
+    PF.layoutEl = el;
+    el.classList.add('pf-selected');
+    layoutBox.classList.remove('pf-empty');
+    layoutSnippet.textContent = describeLayoutEl(el);
+    animSelect.value = el.dataset.pfAnim || '';
+    var isWidget = el.classList.contains('pf-widget-btn');
+    widgetFields.style.display = isWidget ? '' : 'none';
+    widgetDeleteBtn.style.display = isWidget ? '' : 'none';
+    if(isWidget){
+      var lbl = el.querySelector('.pf-widget-label');
+      widgetLabelInput.value = lbl ? lbl.textContent : '';
+      widgetUrlInput.value = el.getAttribute('href') || '';
+      widgetIconSelect.value = el.dataset.icon || 'link';
+    }
+  }
+  function deselectLayoutEl(){
+    if(PF.layoutEl){ PF.layoutEl.classList.remove('pf-selected'); PF.layoutEl = null; }
+    layoutBox.classList.add('pf-empty');
+  }
+
+  posToggle.addEventListener('change', function(){
+    PF.positionMode = posToggle.checked;
+    document.body.classList.toggle('pf-position-mode', PF.positionMode);
+    if(!PF.positionMode){
+      deselectLayoutEl();
+    } else {
+      // スマホなどでエディターパネルがドラッグ操作の邪魔にならないよう、
+      // ONにした瞬間に自動でパネルをたたむ（右下・下のタブから再度開ける）
+      setDrawerOpen(false);
+    }
+  });
+
+  var pfDrag = null;
+  document.addEventListener('pointerdown', function(e){
+    if(!PF.positionMode) return;
+    if(e.target.closest('.pf-image-toolbar')) return;
+    var el = e.target.closest('.pf-draggable');
+    if(!el) return;
+    e.preventDefault();
+    selectLayoutEl(el);
+    var dx = parseFloat(el.dataset.pfDx) || 0;
+    var dy = parseFloat(el.dataset.pfDy) || 0;
+    pfDrag = { el:el, startX:dx, startY:dy, pointerX:e.clientX, pointerY:e.clientY, moved:false };
+    el.classList.add('pf-dragging');
+  });
+  document.addEventListener('pointermove', function(e){
+    if(!pfDrag) return;
+    var dx = e.clientX - pfDrag.pointerX;
+    var dy = e.clientY - pfDrag.pointerY;
+    if(Math.abs(dx) > 2 || Math.abs(dy) > 2) pfDrag.moved = true;
+    var nx = pfDrag.startX + dx, ny = pfDrag.startY + dy;
+    pfDrag.el.style.transform = 'translate(' + nx + 'px,' + ny + 'px)';
+    pfDrag.el.dataset.pfDx = nx; pfDrag.el.dataset.pfDy = ny;
+  });
+  document.addEventListener('pointerup', function(){
+    if(!pfDrag) return;
+    pfDrag.el.classList.remove('pf-dragging');
+    if(pfDrag.moved) markDirty();
+    pfDrag = null;
+  });
+  // iOS Safari は touch-action だけだとスクロールを完全に止めない場合があるため保険をかける
+  document.addEventListener('touchmove', function(e){
+    if(pfDrag) e.preventDefault();
+  }, { passive:false });
+
+  document.addEventListener('keydown', function(e){
+    if(!PF.positionMode || !PF.layoutEl) return;
+    if(document.activeElement && ['INPUT','TEXTAREA','SELECT'].indexOf(document.activeElement.tagName) !== -1) return;
+    var step = e.shiftKey ? 10 : 2;
+    var dx = parseFloat(PF.layoutEl.dataset.pfDx) || 0;
+    var dy = parseFloat(PF.layoutEl.dataset.pfDy) || 0;
+    if(e.key === 'ArrowLeft') dx -= step;
+    else if(e.key === 'ArrowRight') dx += step;
+    else if(e.key === 'ArrowUp') dy -= step;
+    else if(e.key === 'ArrowDown') dy += step;
+    else return;
+    e.preventDefault();
+    PF.layoutEl.dataset.pfDx = dx; PF.layoutEl.dataset.pfDy = dy;
+    PF.layoutEl.style.transform = 'translate(' + dx + 'px,' + dy + 'px)';
+    markDirty();
+  });
+
+  posResetBtn.addEventListener('click', function(){
+    if(!PF.layoutEl) return;
+    PF.layoutEl.style.transform = '';
+    delete PF.layoutEl.dataset.pfDx; delete PF.layoutEl.dataset.pfDy;
+    markDirty();
+  });
+
+  animSelect.addEventListener('change', function(){
+    if(!PF.layoutEl) return;
+    applyAnim(PF.layoutEl, animSelect.value);
+    markDirty();
+  });
+
+  widgetLabelInput.addEventListener('input', function(){
+    if(!PF.layoutEl) return;
+    var lbl = PF.layoutEl.querySelector('.pf-widget-label');
+    if(lbl) lbl.textContent = widgetLabelInput.value;
+    layoutSnippet.textContent = describeLayoutEl(PF.layoutEl);
+    markDirty();
+  });
+  widgetUrlInput.addEventListener('input', function(){
+    if(!PF.layoutEl) return;
+    PF.layoutEl.setAttribute('href', widgetUrlInput.value);
+    markDirty();
+  });
+  widgetIconSelect.addEventListener('change', function(){
+    if(!PF.layoutEl) return;
+    setWidgetIcon(PF.layoutEl, widgetIconSelect.value);
+    markDirty();
+  });
+  widgetDeleteBtn.addEventListener('click', function(){
+    if(!PF.layoutEl) return;
+    if(!confirm('このボタンを削除しますか？')) return;
+    var el = PF.layoutEl;
+    deselectLayoutEl();
+    el.remove();
+    markDirty();
+  });
+
+  function guardWidgetClicks(a){
+    a.addEventListener('click', function(e){
+      if(document.body.classList.contains('pf-editor-open')) e.preventDefault();
+    });
+  }
+  document.querySelectorAll('.pf-widget-btn').forEach(guardWidgetClicks);
+
+  widgetAddBtn.addEventListener('click', function(){
+    var activeView = document.querySelector('.view.active');
+    if(!activeView) return;
+    var a = document.createElement('a');
+    a.className = 'pf-widget-btn pf-draggable';
+    a.href = '#';
+    a.target = '_blank';
+    a.rel = 'noopener';
+    a.innerHTML = '<span class="pf-widget-icon"></span><span class="pf-widget-label">リンク</span>';
+    setWidgetIcon(a, 'link');
+    guardWidgetClicks(a);
+    var holder = activeView.querySelector('.pf-widget-wrap');
+    if(!holder){
+      holder = document.createElement('div');
+      holder.className = 'pf-widget-wrap';
+      var section = activeView.querySelector('.section') || activeView;
+      section.appendChild(holder);
+    }
+    holder.appendChild(a);
+    if(!PF.positionMode){
+      posToggle.checked = true;
+      posToggle.dispatchEvent(new Event('change'));
+    }
+    selectLayoutEl(a);
+    a.scrollIntoView({ behavior:'smooth', block:'center' });
+    markDirty();
+  });
+
+  /* ---------- pages ---------- */
+  var pageList = document.getElementById('pf-page-list');
+  var footerEl = document.querySelector('.site-footer');
+
+  function renderPageList(){
+    pageList.innerHTML = '';
+    document.querySelectorAll('.nav [data-page]').forEach(function(btn){
+      var id = btn.dataset.page;
+      var row = document.createElement('div');
+      row.className = 'pf-page-item';
+      var input = document.createElement('input');
+      input.type = 'text'; input.value = btn.textContent;
+      input.addEventListener('input', function(){
+        document.querySelectorAll('[data-page="' + id + '"]').forEach(function(b){ b.textContent = input.value; });
+        markDirty();
+      });
+      var del = document.createElement('button');
+      del.type = 'button'; del.className = 'del'; del.textContent = '✕'; del.title = 'このページを削除';
+      del.addEventListener('click', function(){
+        if(document.querySelectorAll('.view').length <= 1){
+          alert('最後のページは削除できません。');
+          return;
+        }
+        if(!confirm('「' + input.value + '」を削除しますか？')) return;
+        var wasActive = document.getElementById('view-' + id) && document.getElementById('view-' + id).classList.contains('active');
+        document.querySelectorAll('[data-page="' + id + '"]').forEach(function(b){ b.remove(); });
+        var view = document.getElementById('view-' + id);
+        if(view) view.remove();
+        if(wasActive){
+          var firstBtn = document.querySelector('.nav [data-page]');
+          if(firstBtn) showPage(firstBtn.dataset.page);
+        }
+        renderPageList();
+        markDirty();
+      });
+      row.appendChild(input);
+      row.appendChild(del);
+      pageList.appendChild(row);
+    });
+  }
+  renderPageList();
+
+  document.getElementById('pf-add-page-form').addEventListener('submit', function(e){
+    e.preventDefault();
+    var input = document.getElementById('pf-new-page-title');
+    var title = input.value.trim();
+    if(!title) return;
+    var id = 'custom' + (++PF.pageSeq) + '-' + Date.now().toString(36).slice(-4);
+
+    var desktopBtn = document.createElement('button');
+    desktopBtn.dataset.page = id; desktopBtn.textContent = title;
+    desktopBtn.addEventListener('click', function(){ showPage(id); });
+    document.querySelector('.nav').appendChild(desktopBtn);
+
+    var mobileBtn = document.createElement('button');
+    mobileBtn.dataset.page = id; mobileBtn.textContent = title;
+    mobileBtn.addEventListener('click', function(){ showPage(id); });
+    document.querySelector('.mobile-nav').appendChild(mobileBtn);
+
+    var view = document.createElement('div');
+    view.className = 'view'; view.id = 'view-' + id;
+    view.innerHTML =
+      '<section class="section">' +
+        '<div class="section-head">' +
+          '<h1 class="section-title-en pf-page-title-en">' + title + '</h1>' +
+          '<p class="section-title-jp pf-page-title-jp">新しいページ</p>' +
+          '<p class="section-desc pf-page-text">ここに説明文を入力してください。テキストをクリックして編集できます。</p>' +
+        '</div>' +
+        '<div class="grid"></div>' +
+      '</section>';
+    footerEl.parentNode.insertBefore(view, footerEl);
+
+    var art = document.createElement('div');
+    art.className = 'art wide';
+    attachArtToolbar(art);
+    view.querySelector('.grid').appendChild(art);
+
+    tagEditableText(view);
+    input.value = '';
+    renderPageList();
+    showPage(id);
+    markDirty();
+  });
+
+  /* ---------- 画像保護（透かし・保存抑止） ---------- */
+  var nosaveToggle = document.getElementById('pf-nosave-toggle');
+  var watermarkToggle = document.getElementById('pf-watermark-toggle');
+  var watermarkTextInput = document.getElementById('pf-watermark-text');
+
+  nosaveToggle.checked = document.body.dataset.pfNoSave === '1';
+  watermarkToggle.checked = document.body.dataset.pfWatermarkOn === '1';
+  watermarkTextInput.value = document.body.dataset.pfWatermarkText || '';
+
+  nosaveToggle.addEventListener('change', function(){
+    if(window.__pfSetNoSaveMode) window.__pfSetNoSaveMode(nosaveToggle.checked);
+    markDirty();
+  });
+  watermarkToggle.addEventListener('change', function(){
+    if(window.__pfSetWatermark) window.__pfSetWatermark(watermarkToggle.checked, watermarkTextInput.value.trim());
+    markDirty();
+  });
+  watermarkTextInput.addEventListener('input', function(){
+    if(window.__pfSetWatermark) window.__pfSetWatermark(watermarkToggle.checked, watermarkTextInput.value.trim());
+    markDirty();
+  });
+
+  /* ---------- 公開設定（メール送信先・SEO・ファビコン・ファイルサイズ） ---------- */
+  var contactMailtoInput = document.getElementById('pf-contact-mailto');
+  var contactEndpointInput = document.getElementById('pf-contact-endpoint');
+  var metaDescInput = document.getElementById('pf-meta-desc-input');
+  var ogImageInput = document.getElementById('pf-og-image-input');
+  var faviconInput = document.getElementById('pf-favicon-input');
+  var checkSizeBtn = document.getElementById('pf-check-size');
+  var sizeResult = document.getElementById('pf-size-result');
+  var contactFormEl = document.getElementById('pf-contact-form');
+  var metaDescEl = document.getElementById('pf-meta-description');
+  var ogTitleEl = document.getElementById('pf-og-title');
+  var ogDescEl = document.getElementById('pf-og-description');
+  var ogImageEl = document.getElementById('pf-og-image');
+
+  if(contactFormEl) contactMailtoInput.value = contactFormEl.dataset.mailto || '';
+  if(contactFormEl) contactEndpointInput.value = contactFormEl.dataset.endpoint || '';
+  if(metaDescEl) metaDescInput.value = metaDescEl.getAttribute('content') || '';
+  if(ogImageEl) ogImageInput.value = ogImageEl.getAttribute('content') || '';
+
+  contactMailtoInput.addEventListener('input', function(){
+    if(contactFormEl) contactFormEl.dataset.mailto = contactMailtoInput.value.trim();
+    markDirty();
+  });
+  contactEndpointInput.addEventListener('input', function(){
+    if(contactFormEl) contactFormEl.dataset.endpoint = contactEndpointInput.value.trim();
+    markDirty();
+  });
+  metaDescInput.addEventListener('input', function(){
+    var v = metaDescInput.value.trim();
+    if(metaDescEl) metaDescEl.setAttribute('content', v);
+    if(ogDescEl) ogDescEl.setAttribute('content', v);
+    markDirty();
+  });
+  ogImageInput.addEventListener('input', function(){
+    if(ogImageEl) ogImageEl.setAttribute('content', ogImageInput.value.trim());
+    markDirty();
+  });
+  faviconInput.addEventListener('input', function(){
+    var v = faviconInput.value.trim();
+    if(v && window.__pfSetFavicon) window.__pfSetFavicon(v);
+    markDirty();
+  });
+
+  function humanFileSize(bytes){
+    if(bytes < 1024) return bytes + ' B';
+    var kb = bytes / 1024;
+    if(kb < 1024) return kb.toFixed(0) + ' KB';
+    return (kb / 1024).toFixed(2) + ' MB';
+  }
+  checkSizeBtn.addEventListener('click', function(){
+    var size = new Blob([document.documentElement.outerHTML]).size;
+    var msg = '現在の推定ファイルサイズ：' + humanFileSize(size);
+    if(size > 8 * 1024 * 1024) msg += '（かなり大きめです。画像の枚数・サイズを見直すと読み込みが速くなります）';
+    sizeResult.textContent = msg;
+  });
+
+  /* ---------- export ---------- */
+  function cleanCloneCommon(clone){
+    clone.classList.remove('pf-editor-open', 'pf-text-mode', 'pf-image-mode', 'pf-position-mode');
+    clone.querySelectorAll('.pf-selected, .pf-editing, .pf-dragging').forEach(function(el){
+      el.classList.remove('pf-selected', 'pf-editing', 'pf-dragging');
+    });
+    clone.querySelectorAll('[contenteditable]').forEach(function(el){ el.removeAttribute('contenteditable'); });
+    clone.querySelectorAll('.pf-section.open').forEach(function(el){ el.classList.remove('open'); });
+    return clone;
+  }
+  function downloadHtml(clone, filename){
+    var html = '<!DOCTYPE html>\n' + clone.outerHTML;
+    var blob = new Blob([html], { type:'text/html' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url; a.download = filename;
+    document.body.appendChild(a); a.click(); a.remove();
+    URL.revokeObjectURL(url);
+  }
+
+  document.getElementById('pf-export').addEventListener('click', function(){
+    stopEditingSelected();
+    var clone = cleanCloneCommon(document.documentElement.cloneNode(true));
+    downloadHtml(clone, 'portfolio.html');
+    PF.dirty = false;
+  });
+
+  document.getElementById('pf-export-clean').addEventListener('click', function(){
+    stopEditingSelected();
+    var clone = cleanCloneCommon(document.documentElement.cloneNode(true));
+    var panel = clone.querySelector('#pf-panel'); if(panel) panel.remove();
+    var tabEl = clone.querySelector('#pf-tab'); if(tabEl) tabEl.remove();
+    var fileInputEl = clone.querySelector('#pf-file-input'); if(fileInputEl) fileInputEl.remove();
+    var editorScriptEl = clone.querySelector('#pf-editor-script'); if(editorScriptEl) editorScriptEl.remove();
+    downloadHtml(clone, 'portfolio-public.html');
+    PF.dirty = false;
+  });
+
+  document.getElementById('pf-reset-all').addEventListener('click', function(){
+    if(confirm('保存していない変更はすべて失われます。元の状態に戻しますか？')){
+      PF.dirty = false;
+      location.reload();
+    }
+  });
+
+})();
+</script>
+</body>
+</html>
